@@ -36,9 +36,12 @@ final class WidgetSetupUITests: XCTestCase {
         XCTAssertTrue(search.waitForExistence(timeout: 5), home.debugDescription)
         search.tap()
         search.typeText("Moment")
-        let results = home.staticTexts.matching(identifier: "Moment")
-        XCTAssertTrue(results.firstMatch.waitForExistence(timeout: 10), home.debugDescription)
-        let result = try XCTUnwrap(results.allElementsBoundByIndex.first(where: { $0.isHittable }), home.debugDescription)
+        // A fresh simulator can present the system's QuickPath onboarding over
+        // the results after the keyboard first appears.
+        let keyboardTip = home.buttons["Continue"]
+        if keyboardTip.waitForExistence(timeout: 3) { keyboardTip.tap() }
+        let result = home.cells["Moment"]
+        XCTAssertTrue(result.waitForExistence(timeout: 10), home.debugDescription)
         result.tap()
         let addSelected = home.buttons["Add Widget"]
         XCTAssertTrue(addSelected.waitForExistence(timeout: 5), home.debugDescription)
