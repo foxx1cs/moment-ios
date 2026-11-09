@@ -8,6 +8,10 @@ on:
         type: choice
         default: macos-15
         options: [macos-15, macos-15-intel]
+      publish_release:
+        description: Attach the app, sources and verification to GitHub Release v1.0.2
+        type: boolean
+        default: false
       widget_ui_only:
         description: Run only the native widget setup check
         type: boolean
@@ -81,3 +85,31 @@ jobs:
             build/test-attachments
           if-no-files-found: ignore
           retention-days: 7
+
+
+  publish_release:
+    if: inputs.publish_release == true
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download unsigned IPA
+        uses: actions/download-artifact@v4
+        with:
+          name: Moment-unsigned-IPA
+          path: dist/unsigned
+      - name: Assemble release files
+        run: |
+          cp dist/unsigned/Moment-unsigned.ipa dist/Moment-1.0.2.ipa
+          cp VALIDATION.txt dist/VALIDATION-1.0.2.txt
+          git archive --format=zip --output=dist/Moment-iOS.zip HEAD
+      - name: Attach assets to GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release edit v1.0.2 --repo foxx1cs/moment-ios \
+            --title 'Moment 1.0.2' --notes-file Config/Moment-1.0.2-release-notes.md
+          gh release upload v1.0.2 --repo foxx1cs/moment-ios \
+            dist/Moment-1.0.2.ipa dist/Moment-iOS.zip dist/VALIDATION-1.0.2.txt
