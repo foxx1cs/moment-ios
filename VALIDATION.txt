@@ -1,11 +1,11 @@
 Moment iOS build verification
 
 Repository: https://github.com/foxx1cs/moment-ios
-Successful run: https://github.com/foxx1cs/moment-ios/actions/runs/42611725350
-Source commit: fb6cf704c8f201cc4977f14407558c36722852eb
+Successful run: https://github.com/foxx1cs/moment-ios/actions/runs/42617663953
+Source commit: f92debfdf3d742e47b6f7d50e8e46affa5f80dc8
 Builder: GitHub-hosted macOS, Xcode 16.4, iPhoneOS 18.5 SDK
-Output: Moment-unsigned.ipa, 504930 bytes
-SHA-256: 268837b5386f470737aa8fb643e572b4ac35b95d8357e8f358d76ce3eea846e8
+Output: Moment-1.0.1.ipa, 509482 bytes, version 1.0.1 build 2
+SHA-256: f036dd3cd28638b44dfa94093c82998a7a45ad8214e20d780894056aea525ec3
 
 PASS Xcode Release archive for generic iOS device
 PASS application and embedded WidgetKit extension compilation
@@ -15,7 +15,12 @@ PASS minimum iOS 17.0 and iPhoneOS platform in both bundles
 PASS matching AppGroupIdentifier values
 PASS IPA ZIP integrity and expected Payload structure
 PASS independent OpenStep project parsing and structural references
-PASS Swift syntax parsing in 14 files
+PASS Swift syntax parsing in 16 files
+PASS all 16 XCTest cases (9 countdown/model + 7 storage regressions)
+PASS UI creation through the empty-state button with App Groups unavailable
+PASS event remains visible after terminating and relaunching the app
+PASS + button opens the event editor after relaunch
+PASS screenshot inspection: saved event shown, no blocking App Group alert
 
-Not run: 9 provided XCTest cases, simulator rendering, physical-device installation.
-Unsigned output requires signing. App Groups provisioning is necessary for storage and widgets.
+Not run: physical-device installation of this updated build.
+Unsigned output requires signing. App Groups are optional for app storage and required for widgets.
