@@ -103,13 +103,38 @@ jobs:
       - name: Assemble release files
         run: |
           cp dist/unsigned/Moment-unsigned.ipa dist/Moment-1.0.2.ipa
-          cp VALIDATION.txt dist/VALIDATION-1.0.2.txt
-          git archive --format=zip --output=dist/Moment-iOS.zip HEAD
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          import hashlib, json, re, subprocess, zipfile
+          ipa = Path("dist/Moment-1.0.2.ipa").read_bytes()
+          digest, size = hashlib.sha256(ipa).hexdigest(), len(ipa)
+          files = ["README.md", "VALIDATION.txt", "Config/Moment-1.0.2-release-notes.md"]
+          for filename in files:
+              path = Path(filename)
+              source = path.read_text()
+              source = re.sub(r"SHA-256 IPA: `[^`]+`", f"SHA-256 IPA: `{digest}`", source)
+              source = re.sub(r"SHA-256: [0-9a-f]{64}", f"SHA-256: {digest}", source)
+              source = re.sub(r"Output: (Moment-1\.0\.2\.ipa, )\d+ bytes", rf"Output: \g<1>{size} bytes", source)
+              source = re.sub(r"(Moment-1\.0\.2\.ipa, )\d+ bytes", rf"\g<1>{size} bytes", source)
+              path.write_text(source)
+          tracked = subprocess.check_output(["git", "ls-files", "-z"]).decode().split("\0")
+          with zipfile.ZipFile("dist/Moment-iOS.zip", "w", zipfile.ZIP_DEFLATED) as archive:
+              for name in filter(None, tracked):
+                  archive.write(name, "Moment/" + name)
+          Path("dist/VALIDATION-1.0.2.txt").write_text(Path("VALIDATION.txt").read_text())
+          PYTHON
       - name: Attach assets to GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release edit v1.0.2 --repo foxx1cs/moment-ios \
             --title 'Moment 1.0.2' --notes-file Config/Moment-1.0.2-release-notes.md
+          for name in Moment-1.0.2.ipa Moment-iOS.zip VALIDATION-1.0.2.txt; do
+            asset_id=$(gh api repos/foxx1cs/moment-ios/releases/439324489/assets \
+              --jq ".[] | select(.name == \"${name}\") | .id" || true)
+            if [ -n "$asset_id" ]; then
+              gh api --method DELETE "repos/foxx1cs/moment-ios/releases/assets/$asset_id"
+            fi
+          done
           gh release upload v1.0.2 --repo foxx1cs/moment-ios \
             dist/Moment-1.0.2.ipa dist/Moment-iOS.zip dist/VALIDATION-1.0.2.txt
