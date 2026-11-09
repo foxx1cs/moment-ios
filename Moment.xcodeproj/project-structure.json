@@ -107,6 +107,12 @@
     "sourceTree": "<group>",
     "lastKnownFileType": "sourcecode.swift"
   },
+  "69E791FAFA9AF8A035F58697": {
+    "isa": "PBXFileReference",
+    "path": "MomentUITests/WidgetSetupUITests.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
   "B4E5998C67ADF64E0E9F2043": {
     "isa": "PBXFileReference",
     "path": "Moment/Assets.xcassets",
@@ -221,7 +227,8 @@
   "42CDA48D68C32DD8CEB12B79": {
     "isa": "PBXGroup",
     "children": [
-      "4C7D3B78282A2A11AA22B631"
+      "4C7D3B78282A2A11AA22B631",
+      "69E791FAFA9AF8A035F58697"
     ],
     "sourceTree": "<group>",
     "name": "MomentUITests"
@@ -679,11 +686,16 @@
     "isa": "PBXBuildFile",
     "fileRef": "4C7D3B78282A2A11AA22B631"
   },
+  "FBE13E77CAA2B181D466F545": {
+    "isa": "PBXBuildFile",
+    "fileRef": "69E791FAFA9AF8A035F58697"
+  },
   "691BBC8FC662107CB573E08F": {
     "isa": "PBXSourcesBuildPhase",
     "buildActionMask": 2147483647,
     "files": [
-      "393F8CDD04C135416368C25A"
+      "393F8CDD04C135416368C25A",
+      "FBE13E77CAA2B181D466F545"
     ],
     "runOnlyForDeploymentPostprocessing": 0
   },

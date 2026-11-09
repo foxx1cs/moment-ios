@@ -50,7 +50,7 @@ struct CountdownConfiguration: WidgetConfigurationIntent {
     @Parameter(title: "Название", default: "Мой момент")
     var manualTitle: String
 
-    @Parameter(title: "Дата и время", kind: .dateAndTime)
+    @Parameter(title: "Дата и время", kind: .dateTime)
     var targetDate: Date?
 
     @Parameter(title: "Секунды", default: 0, inclusiveRange: (0, 59))
@@ -60,7 +60,7 @@ struct CountdownConfiguration: WidgetConfigurationIntent {
     var event: CountdownEventEntity?
 
     static var parameterSummary: some ParameterSummary {
-        When(\.$mode, .equalTo, .manual) {
+        When(\CountdownConfiguration.$mode, .equalTo, WidgetSetupMode.manual) {
             Summary {
                 \.$mode
                 \.$manualTitle
