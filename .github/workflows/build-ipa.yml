@@ -52,10 +52,11 @@ jobs:
       - name: Build test applications
         timeout-minutes: 10
         run: bash Scripts/test_ios.sh build
-      - name: Verify local persistence and event creation without App Groups
-        timeout-minutes: 6
+      - name: Verify events and native widget setup without App Groups
+        timeout-minutes: 12
         run: bash Scripts/test_ios.sh run
       - name: Export test screenshots
+        timeout-minutes: 2
         if: always()
         continue-on-error: true
         run: |
