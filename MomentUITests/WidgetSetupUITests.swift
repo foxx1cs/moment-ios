@@ -30,9 +30,10 @@ final class WidgetSetupUITests: XCTestCase {
         XCTAssertTrue(addWidget.waitForExistence(timeout: 5), home.debugDescription)
         addWidget.tap()
 
-        XCTAssertTrue(home.searchFields.firstMatch.waitForExistence(timeout: 5), home.debugDescription)
-        // SpringBoard also exposes offscreen App Library search fields.
-        let search = try XCTUnwrap(home.searchFields.allElementsBoundByIndex.first(where: { $0.isHittable }), home.debugDescription)
+        // SpringBoard incorrectly reports the offscreen App Library field as
+        // hittable. The gallery field has its own stable label.
+        let search = home.searchFields["Search Widgets"]
+        XCTAssertTrue(search.waitForExistence(timeout: 5), home.debugDescription)
         search.tap()
         search.typeText("Moment")
         let results = home.staticTexts.matching(identifier: "Moment")
@@ -50,7 +51,8 @@ final class WidgetSetupUITests: XCTestCase {
         XCTAssertTrue(widget.waitForExistence(timeout: 15), home.debugDescription)
         widget.press(forDuration: 1.3)
         let editWidget = home.buttons.matching(
-            NSPredicate(format: "label BEGINSWITH %@ AND label CONTAINS %@", "Edit", "Moment")
+            NSPredicate(format: "label == %@ OR (label BEGINSWITH %@ AND label CONTAINS %@)",
+                        "Edit Widget", "Edit", "Moment")
         ).firstMatch
         XCTAssertTrue(editWidget.waitForExistence(timeout: 5), home.debugDescription)
         editWidget.tap()
