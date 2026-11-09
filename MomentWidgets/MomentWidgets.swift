@@ -11,7 +11,7 @@ struct MomentWidgets: Widget {
                 .containerBackground(for: .widget) { Palette.background }
         }
         .configurationDisplayName("Тот самый момент")
-        .description("Обратный отсчёт в часах, минутах и секундах. Выберите своё событие.")
+        .description("Отсчёт до секунды. Название и дату можно задать прямо в настройках виджета, без синхронизации с приложением.")
         .supportedFamilies([.systemSmall, .systemMedium, .accessoryRectangular])
     }
 }
@@ -31,13 +31,16 @@ struct CountdownWidgetView: View {
             } else {
                 VStack(alignment: .leading, spacing: 5) {
                     Label("Moment", systemImage: "sparkles").font(.headline)
-                    Text(entry.unavailable ? "Откройте приложение" : entry.deleted ? "Событие удалено" : "Создайте событие")
+                    Text(entry.unavailable ? "Выберите «Вручную»" : entry.deleted ? "Событие удалено" : entry.manual ? "Укажите дату и время" : "Создайте событие")
                         .font(.caption)
+                    if !entry.deleted && family != .accessoryRectangular {
+                        Text("Зажмите → Изменить виджет").font(.caption2)
+                    }
                     if entry.deleted && family != .accessoryRectangular {
                         Text("Выберите другое в настройках виджета").font(.caption2)
                     }
                 }
-                .widgetURL(URL(string: "moment://home"))
+                .widgetURL(URL(string: "moment://widgets"))
             }
         }
     }
@@ -97,6 +100,7 @@ struct CountdownWidgetView: View {
     }
 
     private func eventURL(_ event: CountdownEvent) -> URL? {
-        URL(string: "moment://event/\(event.id.uuidString)")
+        if entry.manual { return URL(string: "moment://widgets") }
+        return URL(string: "moment://event/\(event.id.uuidString)")
     }
 }

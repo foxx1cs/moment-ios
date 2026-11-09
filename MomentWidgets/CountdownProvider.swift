@@ -6,6 +6,7 @@ struct CountdownEntry: TimelineEntry {
     let event: CountdownEvent?
     var unavailable = false
     var deleted = false
+    var manual = false
 }
 
 struct CountdownProvider: AppIntentTimelineProvider {
@@ -25,12 +26,18 @@ struct CountdownProvider: AppIntentTimelineProvider {
         if let event = current.event, event.date > now {
             // Only the end state needs a new entry. Text(timerInterval:) renders
             // the seconds itself without one-second timeline reloads.
-            entries.append(CountdownEntry(date: event.date, event: event))
+            entries.append(CountdownEntry(date: event.date, event: event, manual: current.manual))
         }
         return Timeline(entries: entries, policy: .after(now.addingTimeInterval(3600)))
     }
 
     private func load(_ configuration: CountdownConfiguration, at now: Date) -> CountdownEntry {
+        if configuration.mode == .manual {
+            let event = ManualWidgetEvent.make(title: configuration.manualTitle,
+                                               date: configuration.targetDate,
+                                               seconds: configuration.seconds, now: now)
+            return CountdownEntry(date: now, event: event, manual: true)
+        }
         do {
             let archive = try SharedStore.live().read()
             if let selected = configuration.event {

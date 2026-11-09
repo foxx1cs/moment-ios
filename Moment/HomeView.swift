@@ -56,6 +56,10 @@ struct HomeView: View {
                 if phase == .active { store.reload() }
             }
             .onOpenURL { url in
+                if url.scheme == "moment", url.host == "widgets" {
+                    showGuide = true
+                    return
+                }
                 guard url.scheme == "moment", url.host == "event",
                       let id = UUID(uuidString: url.lastPathComponent) else { return }
                 selectedEvent = store.events.first { $0.id == id }
@@ -156,9 +160,9 @@ struct HomeView: View {
                     .font(.system(size: 25, weight: .light))
                     .foregroundStyle(Palette.aqua)
                 VStack(alignment: .leading, spacing: 5) {
-                    Text(store.widgetsAvailable ? "Всегда перед глазами" : "События на вашем iPhone")
+                    Text(store.widgetsAvailable ? "Всегда перед глазами" : "Виджет с ручной настройкой")
                         .font(.system(size: 14, weight: .semibold))
-                    Text(store.widgetsAvailable ? "Отсчёт на экране блокировки" : "Виджеты недоступны в этой установке")
+                    Text(store.widgetsAvailable ? "Отсчёт на экране блокировки" : "Название и дата задаются в виджете")
                         .font(.system(size: 11))
                         .foregroundStyle(Palette.muted)
                 }
