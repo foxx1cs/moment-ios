@@ -28,9 +28,10 @@ raise SystemExit("No available iPhone simulator for the active SDK")
 run_xcode_tests() {
     local action="$1" simulator_id
     simulator_id="$(cat "${project_dir}/build/simulator-id")"
-    local extra=()
+    # macOS ships Bash 3.2: expanding an empty array with set -u fails there.
+    local extra=(-destination "platform=iOS Simulator,id=${simulator_id}")
     if [[ "$action" == "test-without-building" ]]; then
-        extra=(-resultBundlePath "${project_dir}/build/Moment-tests.xcresult"
+        extra+=(-resultBundlePath "${project_dir}/build/Moment-tests.xcresult"
                -test-timeouts-enabled YES
                -default-test-execution-time-allowance 120
                -maximum-test-execution-time-allowance 180)
@@ -38,7 +39,6 @@ run_xcode_tests() {
     xcodebuild "$action" \
         -project "${project_dir}/Moment.xcodeproj" \
         -scheme Moment -configuration Debug \
-        -destination "platform=iOS Simulator,id=${simulator_id}" \
         -parallel-testing-enabled NO \
         -derivedDataPath "${project_dir}/build/TestDerivedData" \
         "${extra[@]}" \
