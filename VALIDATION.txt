@@ -1,26 +1,31 @@
-Moment iOS build verification
+Moment iOS 1.0.2 build verification
 
 Repository: https://github.com/foxx1cs/moment-ios
-Successful run: https://github.com/foxx1cs/moment-ios/actions/runs/42617663953
-Source commit: f92debfdf3d742e47b6f7d50e8e46affa5f80dc8
+Device archive: https://github.com/foxx1cs/moment-ios/actions/runs/42626814185
+Source commit: 8120495af0afd8a7873a088b106c0406f02b432d
 Builder: GitHub-hosted macOS, Xcode 16.4, iPhoneOS 18.5 SDK
-Output: Moment-1.0.1.ipa, 509482 bytes, version 1.0.1 build 2
-SHA-256: f036dd3cd28638b44dfa94093c82998a7a45ad8214e20d780894056aea525ec3
+Output: Moment-1.0.2.ipa, 518206 bytes, version 1.0.2 build 3
+SHA-256: 9d5d4328b63a205babab51516ca7b25276c20cec2fe26242f3f6e878ee79a99b
 
 PASS Xcode Release archive for generic iOS device
 PASS application and embedded WidgetKit extension compilation
+PASS App Intents metadata extraction for manual and from-app modes
 PASS both Info.plist files
 PASS arm64 executable architecture in both bundles
 PASS minimum iOS 17.0 and iPhoneOS platform in both bundles
-PASS matching AppGroupIdentifier values
 PASS IPA ZIP integrity and expected Payload structure
 PASS independent OpenStep project parsing and structural references
-PASS Swift syntax parsing in 16 files
-PASS all 16 XCTest cases (9 countdown/model + 7 storage regressions)
+PASS Swift syntax parsing in 19 files
+
+Test run 42625030037 (same application code, earlier widget UI test harness):
+PASS all 22 XCTest cases (9 countdown/model + 7 storage + 6 manual widget)
 PASS UI creation through the empty-state button with App Groups unavailable
 PASS event remains visible after terminating and relaunching the app
 PASS + button opens the event editor after relaunch
-PASS screenshot inspection: saved event shown, no blocking App Group alert
+INCOMPLETE native widget configuration UI verification: the original automation
+selected an offscreen App Library search field. The selector has been corrected.
+Run 42626814185 attempt 1 timed out before any tests started; attempt 2 pending.
 
 Not run: physical-device installation of this updated build.
-Unsigned output requires signing. App Groups are optional for app storage and required for widgets.
+Unsigned output requires signing. App Groups are optional for app storage and
+manual widget configuration. The from-app event list requires a shared App Group.
