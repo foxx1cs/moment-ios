@@ -1,0 +1,11 @@
+// Change this once to your unique reverse-domain prefix before device signing.
+MOMENT_BUNDLE_PREFIX = com.example.moment
+MOMENT_APP_GROUP = group.$(MOMENT_BUNDLE_PREFIX)
+
+IPHONEOS_DEPLOYMENT_TARGET = 17.0
+SWIFT_VERSION = 5.0
+TARGETED_DEVICE_FAMILY = 1,2
+CODE_SIGN_STYLE = Automatic
+MARKETING_VERSION = 1.0.0
+CURRENT_PROJECT_VERSION = 1
+DEVELOPMENT_TEAM =

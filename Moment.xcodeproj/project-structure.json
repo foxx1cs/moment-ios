@@ -1,0 +1,705 @@
+{
+  "19193EF35C46C9D9A9535C4D": {
+    "isa": "PBXFileReference",
+    "path": "Moment/CountdownDisplay.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "5FC027410D7D3AFE751AC12F": {
+    "isa": "PBXFileReference",
+    "path": "Moment/EventDetail.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "B6B3A97C4EC3860F90777F12": {
+    "isa": "PBXFileReference",
+    "path": "Moment/EventEditor.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "B91217B195045BD41E6DD86F": {
+    "isa": "PBXFileReference",
+    "path": "Moment/EventStore.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "F84D305F991EFDF8153AC7F9": {
+    "isa": "PBXFileReference",
+    "path": "Moment/HomeView.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "36F5F674DB6739F108BC3034": {
+    "isa": "PBXFileReference",
+    "path": "Moment/MomentApp.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "26B074AA5E0474BB510E10CC": {
+    "isa": "PBXFileReference",
+    "path": "Moment/WidgetGuide.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "3F4CD74B1FBCC3CFC02A39EE": {
+    "isa": "PBXFileReference",
+    "path": "Shared/CountdownEvent.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "5399B7D0B17BF2F627D0F784": {
+    "isa": "PBXFileReference",
+    "path": "Shared/SharedStore.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "761E1B62E5DB0F2CDBC7FA30": {
+    "isa": "PBXFileReference",
+    "path": "Shared/Theme.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "906ADD909A7EE71F0F8AB772": {
+    "isa": "PBXFileReference",
+    "path": "MomentWidgets/CountdownProvider.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "CD5361C68766D5F3204996C6": {
+    "isa": "PBXFileReference",
+    "path": "MomentWidgets/EventEntity.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "7369E298887F3FDD3E0BFEAC": {
+    "isa": "PBXFileReference",
+    "path": "MomentWidgets/MomentWidgets.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "6CAD4DD3CEE3F087DD403C1A": {
+    "isa": "PBXFileReference",
+    "path": "MomentTests/CountdownTests.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "B4E5998C67ADF64E0E9F2043": {
+    "isa": "PBXFileReference",
+    "path": "Moment/Assets.xcassets",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "folder.assetcatalog"
+  },
+  "F8769A72388866CAE997FF92": {
+    "isa": "PBXFileReference",
+    "path": "Moment/PrivacyInfo.xcprivacy",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "text.xml"
+  },
+  "2C94172D67DA116C7BB32C13": {
+    "isa": "PBXFileReference",
+    "path": "Config/Shared.xcconfig",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "text.xcconfig"
+  },
+  "ABFAF3061CEE1EED8BF9F6AB": {
+    "isa": "PBXFileReference",
+    "path": "Config/Moment-Info.plist",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "text.plist.xml"
+  },
+  "CFC8BEF0B00ACE3AC4141BEA": {
+    "isa": "PBXFileReference",
+    "path": "Config/Widgets-Info.plist",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "text.plist.xml"
+  },
+  "B06ED97A0B198796AE98680C": {
+    "isa": "PBXFileReference",
+    "path": "Config/Moment.entitlements",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "text.plist.xml"
+  },
+  "3A074E7470903A8683F7B854": {
+    "isa": "PBXFileReference",
+    "explicitFileType": "wrapper.application",
+    "includeInIndex": 0,
+    "path": "Moment.app",
+    "sourceTree": "BUILT_PRODUCTS_DIR"
+  },
+  "1E56103C402F73CCF894BA42": {
+    "isa": "PBXFileReference",
+    "explicitFileType": "wrapper.app-extension",
+    "includeInIndex": 0,
+    "path": "MomentWidgets.appex",
+    "sourceTree": "BUILT_PRODUCTS_DIR"
+  },
+  "FD656D6FBB1795015C75CFFF": {
+    "isa": "PBXFileReference",
+    "explicitFileType": "wrapper.cfbundle",
+    "includeInIndex": 0,
+    "path": "MomentTests.xctest",
+    "sourceTree": "BUILT_PRODUCTS_DIR"
+  },
+  "A0233C3C2E52780D419DE39D": {
+    "isa": "PBXGroup",
+    "children": [
+      "19193EF35C46C9D9A9535C4D",
+      "5FC027410D7D3AFE751AC12F",
+      "B6B3A97C4EC3860F90777F12",
+      "B91217B195045BD41E6DD86F",
+      "F84D305F991EFDF8153AC7F9",
+      "36F5F674DB6739F108BC3034",
+      "26B074AA5E0474BB510E10CC",
+      "B4E5998C67ADF64E0E9F2043",
+      "F8769A72388866CAE997FF92"
+    ],
+    "sourceTree": "<group>",
+    "name": "Moment"
+  },
+  "44C7E229889FE9D1BB841A79": {
+    "isa": "PBXGroup",
+    "children": [
+      "3F4CD74B1FBCC3CFC02A39EE",
+      "5399B7D0B17BF2F627D0F784",
+      "761E1B62E5DB0F2CDBC7FA30"
+    ],
+    "sourceTree": "<group>",
+    "name": "Shared"
+  },
+  "270318E5C8FE346CC9E1CF70": {
+    "isa": "PBXGroup",
+    "children": [
+      "906ADD909A7EE71F0F8AB772",
+      "CD5361C68766D5F3204996C6",
+      "7369E298887F3FDD3E0BFEAC"
+    ],
+    "sourceTree": "<group>",
+    "name": "MomentWidgets"
+  },
+  "6FC809F6DFDAA89769AD1CF1": {
+    "isa": "PBXGroup",
+    "children": [
+      "6CAD4DD3CEE3F087DD403C1A"
+    ],
+    "sourceTree": "<group>",
+    "name": "MomentTests"
+  },
+  "5619E268CFFE28118C19FC6A": {
+    "isa": "PBXGroup",
+    "children": [
+      "2C94172D67DA116C7BB32C13",
+      "ABFAF3061CEE1EED8BF9F6AB",
+      "CFC8BEF0B00ACE3AC4141BEA",
+      "B06ED97A0B198796AE98680C"
+    ],
+    "sourceTree": "<group>",
+    "name": "Config"
+  },
+  "5151B46607EBC8890D8DFCC2": {
+    "isa": "PBXGroup",
+    "children": [
+      "3A074E7470903A8683F7B854",
+      "1E56103C402F73CCF894BA42",
+      "FD656D6FBB1795015C75CFFF"
+    ],
+    "sourceTree": "<group>",
+    "name": "Products"
+  },
+  "AA4ACA445B3FBAF47CDE31AC": {
+    "isa": "PBXFileReference",
+    "path": "README.md",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "net.daringfireball.markdown"
+  },
+  "DF891E785808226D241F246E": {
+    "isa": "PBXGroup",
+    "children": [
+      "A0233C3C2E52780D419DE39D",
+      "44C7E229889FE9D1BB841A79",
+      "270318E5C8FE346CC9E1CF70",
+      "6FC809F6DFDAA89769AD1CF1",
+      "5619E268CFFE28118C19FC6A",
+      "5151B46607EBC8890D8DFCC2",
+      "AA4ACA445B3FBAF47CDE31AC"
+    ],
+    "sourceTree": "<group>",
+    "name": "root"
+  },
+  "A60602A2FE065EC68FA677D8": {
+    "isa": "PBXBuildFile",
+    "fileRef": "19193EF35C46C9D9A9535C4D"
+  },
+  "78F90F440508A43D416E8B33": {
+    "isa": "PBXBuildFile",
+    "fileRef": "5FC027410D7D3AFE751AC12F"
+  },
+  "9CC49C95D783BAA29715C288": {
+    "isa": "PBXBuildFile",
+    "fileRef": "B6B3A97C4EC3860F90777F12"
+  },
+  "E66D6F2FE0C1E1242532069C": {
+    "isa": "PBXBuildFile",
+    "fileRef": "B91217B195045BD41E6DD86F"
+  },
+  "F23F5A57CEAA1DEDB2E22E6D": {
+    "isa": "PBXBuildFile",
+    "fileRef": "F84D305F991EFDF8153AC7F9"
+  },
+  "482EFD5EE963C2042876D80A": {
+    "isa": "PBXBuildFile",
+    "fileRef": "36F5F674DB6739F108BC3034"
+  },
+  "BF201513042AAEEEB4628CD7": {
+    "isa": "PBXBuildFile",
+    "fileRef": "26B074AA5E0474BB510E10CC"
+  },
+  "8B38E40FE91C38E2BFBC7518": {
+    "isa": "PBXBuildFile",
+    "fileRef": "3F4CD74B1FBCC3CFC02A39EE"
+  },
+  "80AE089AF1F8EA907613B34D": {
+    "isa": "PBXBuildFile",
+    "fileRef": "5399B7D0B17BF2F627D0F784"
+  },
+  "AEF13F4BF4BA0DEB5427061C": {
+    "isa": "PBXBuildFile",
+    "fileRef": "761E1B62E5DB0F2CDBC7FA30"
+  },
+  "E26083AE9F98617BF2343447": {
+    "isa": "PBXSourcesBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [
+      "A60602A2FE065EC68FA677D8",
+      "78F90F440508A43D416E8B33",
+      "9CC49C95D783BAA29715C288",
+      "E66D6F2FE0C1E1242532069C",
+      "F23F5A57CEAA1DEDB2E22E6D",
+      "482EFD5EE963C2042876D80A",
+      "BF201513042AAEEEB4628CD7",
+      "8B38E40FE91C38E2BFBC7518",
+      "80AE089AF1F8EA907613B34D",
+      "AEF13F4BF4BA0DEB5427061C"
+    ],
+    "runOnlyForDeploymentPostprocessing": 0
+  },
+  "BC4F488FB1BFA5059D351A56": {
+    "isa": "PBXFrameworksBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [],
+    "runOnlyForDeploymentPostprocessing": 0
+  },
+  "812D29B88506A296EB6A6063": {
+    "isa": "PBXBuildFile",
+    "fileRef": "B4E5998C67ADF64E0E9F2043"
+  },
+  "59BE9C7E3A5319931E77E56F": {
+    "isa": "PBXBuildFile",
+    "fileRef": "F8769A72388866CAE997FF92"
+  },
+  "196B11345E7306858216DCAD": {
+    "isa": "PBXResourcesBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [
+      "812D29B88506A296EB6A6063",
+      "59BE9C7E3A5319931E77E56F"
+    ],
+    "runOnlyForDeploymentPostprocessing": 0
+  },
+  "40FD066480FE363A47C5C865": {
+    "isa": "PBXBuildFile",
+    "fileRef": "1E56103C402F73CCF894BA42",
+    "settings": {
+      "ATTRIBUTES": [
+        "RemoveHeadersOnCopy"
+      ]
+    }
+  },
+  "86627BF984031B5549B56AF5": {
+    "isa": "PBXCopyFilesBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [
+      "40FD066480FE363A47C5C865"
+    ],
+    "runOnlyForDeploymentPostprocessing": 0,
+    "dstPath": "",
+    "dstSubfolderSpec": 13,
+    "name": "Embed App Extensions"
+  },
+  "A9FBA8C606B4F52BACE5E5BF": {
+    "isa": "PBXContainerItemProxy",
+    "containerPortal": "98F54143AB4E86B28C3AFEE0",
+    "proxyType": 1,
+    "remoteGlobalIDString": "CF9D98541DA2260225F71C12",
+    "remoteInfo": "MomentWidgets"
+  },
+  "397BF0B48389B9D9C77BA90C": {
+    "isa": "PBXTargetDependency",
+    "target": "CF9D98541DA2260225F71C12",
+    "targetProxy": "A9FBA8C606B4F52BACE5E5BF"
+  },
+  "F961EA51A8BE9608D9E16673": {
+    "isa": "XCBuildConfiguration",
+    "buildSettings": {
+      "PRODUCT_BUNDLE_IDENTIFIER": "$(MOMENT_BUNDLE_PREFIX)",
+      "INFOPLIST_FILE": "Config/Moment-Info.plist",
+      "CODE_SIGN_ENTITLEMENTS": "Config/Moment.entitlements",
+      "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
+      "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": "AccentColor",
+      "ENABLE_PREVIEWS": "YES",
+      "LD_RUNPATH_SEARCH_PATHS": [
+        "$(inherited)",
+        "@executable_path/Frameworks"
+      ],
+      "PRODUCT_NAME": "$(TARGET_NAME)",
+      "SWIFT_EMIT_LOC_STRINGS": "YES"
+    },
+    "name": "Debug",
+    "baseConfigurationReference": "2C94172D67DA116C7BB32C13"
+  },
+  "5E06063ED9FAE38AF2C0DDFD": {
+    "isa": "XCBuildConfiguration",
+    "buildSettings": {
+      "PRODUCT_BUNDLE_IDENTIFIER": "$(MOMENT_BUNDLE_PREFIX)",
+      "INFOPLIST_FILE": "Config/Moment-Info.plist",
+      "CODE_SIGN_ENTITLEMENTS": "Config/Moment.entitlements",
+      "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
+      "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": "AccentColor",
+      "ENABLE_PREVIEWS": "YES",
+      "LD_RUNPATH_SEARCH_PATHS": [
+        "$(inherited)",
+        "@executable_path/Frameworks"
+      ],
+      "PRODUCT_NAME": "$(TARGET_NAME)",
+      "SWIFT_EMIT_LOC_STRINGS": "YES"
+    },
+    "name": "Release",
+    "baseConfigurationReference": "2C94172D67DA116C7BB32C13"
+  },
+  "D9D4C990787F89C58B828E1B": {
+    "isa": "XCConfigurationList",
+    "buildConfigurations": [
+      "F961EA51A8BE9608D9E16673",
+      "5E06063ED9FAE38AF2C0DDFD"
+    ],
+    "defaultConfigurationIsVisible": 0,
+    "defaultConfigurationName": "Release"
+  },
+  "2BF38DFDAC7FC5E7CC7F71DB": {
+    "isa": "PBXNativeTarget",
+    "buildConfigurationList": "D9D4C990787F89C58B828E1B",
+    "buildPhases": [
+      "E26083AE9F98617BF2343447",
+      "BC4F488FB1BFA5059D351A56",
+      "196B11345E7306858216DCAD",
+      "86627BF984031B5549B56AF5"
+    ],
+    "buildRules": [],
+    "dependencies": [
+      "397BF0B48389B9D9C77BA90C"
+    ],
+    "name": "Moment",
+    "productName": "Moment",
+    "productReference": "3A074E7470903A8683F7B854",
+    "productType": "com.apple.product-type.application"
+  },
+  "84659CC4D7181056048EC283": {
+    "isa": "PBXBuildFile",
+    "fileRef": "906ADD909A7EE71F0F8AB772"
+  },
+  "0648978B77A5527B4C0C2C35": {
+    "isa": "PBXBuildFile",
+    "fileRef": "CD5361C68766D5F3204996C6"
+  },
+  "07A212FE55B80E249B3CBEF4": {
+    "isa": "PBXBuildFile",
+    "fileRef": "7369E298887F3FDD3E0BFEAC"
+  },
+  "5E74AC00EE88F8B3B109602D": {
+    "isa": "PBXBuildFile",
+    "fileRef": "3F4CD74B1FBCC3CFC02A39EE"
+  },
+  "7908B1A4C93DB130CC2D1D50": {
+    "isa": "PBXBuildFile",
+    "fileRef": "5399B7D0B17BF2F627D0F784"
+  },
+  "99D8256629BAA5B784158E98": {
+    "isa": "PBXBuildFile",
+    "fileRef": "761E1B62E5DB0F2CDBC7FA30"
+  },
+  "5B3886DDC3DE5D1A76D11725": {
+    "isa": "PBXSourcesBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [
+      "84659CC4D7181056048EC283",
+      "0648978B77A5527B4C0C2C35",
+      "07A212FE55B80E249B3CBEF4",
+      "5E74AC00EE88F8B3B109602D",
+      "7908B1A4C93DB130CC2D1D50",
+      "99D8256629BAA5B784158E98"
+    ],
+    "runOnlyForDeploymentPostprocessing": 0
+  },
+  "B96D1663B9C63E18F8D4D67B": {
+    "isa": "PBXFrameworksBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [],
+    "runOnlyForDeploymentPostprocessing": 0
+  },
+  "609D42868CFE64467A2AF7F6": {
+    "isa": "PBXResourcesBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [],
+    "runOnlyForDeploymentPostprocessing": 0
+  },
+  "789CE0DB3359EB1D424407E7": {
+    "isa": "XCBuildConfiguration",
+    "buildSettings": {
+      "PRODUCT_BUNDLE_IDENTIFIER": "$(MOMENT_BUNDLE_PREFIX).widgets",
+      "INFOPLIST_FILE": "Config/Widgets-Info.plist",
+      "CODE_SIGN_ENTITLEMENTS": "Config/Moment.entitlements",
+      "APPLICATION_EXTENSION_API_ONLY": "YES",
+      "SKIP_INSTALL": "YES",
+      "LD_RUNPATH_SEARCH_PATHS": [
+        "$(inherited)",
+        "@executable_path/Frameworks",
+        "@executable_path/../../Frameworks"
+      ],
+      "PRODUCT_NAME": "$(TARGET_NAME)",
+      "SWIFT_EMIT_LOC_STRINGS": "YES"
+    },
+    "name": "Debug",
+    "baseConfigurationReference": "2C94172D67DA116C7BB32C13"
+  },
+  "E91D98C74AB9A25677E97633": {
+    "isa": "XCBuildConfiguration",
+    "buildSettings": {
+      "PRODUCT_BUNDLE_IDENTIFIER": "$(MOMENT_BUNDLE_PREFIX).widgets",
+      "INFOPLIST_FILE": "Config/Widgets-Info.plist",
+      "CODE_SIGN_ENTITLEMENTS": "Config/Moment.entitlements",
+      "APPLICATION_EXTENSION_API_ONLY": "YES",
+      "SKIP_INSTALL": "YES",
+      "LD_RUNPATH_SEARCH_PATHS": [
+        "$(inherited)",
+        "@executable_path/Frameworks",
+        "@executable_path/../../Frameworks"
+      ],
+      "PRODUCT_NAME": "$(TARGET_NAME)",
+      "SWIFT_EMIT_LOC_STRINGS": "YES"
+    },
+    "name": "Release",
+    "baseConfigurationReference": "2C94172D67DA116C7BB32C13"
+  },
+  "1ADAEDE4B0648C53657402AC": {
+    "isa": "XCConfigurationList",
+    "buildConfigurations": [
+      "789CE0DB3359EB1D424407E7",
+      "E91D98C74AB9A25677E97633"
+    ],
+    "defaultConfigurationIsVisible": 0,
+    "defaultConfigurationName": "Release"
+  },
+  "CF9D98541DA2260225F71C12": {
+    "isa": "PBXNativeTarget",
+    "buildConfigurationList": "1ADAEDE4B0648C53657402AC",
+    "buildPhases": [
+      "5B3886DDC3DE5D1A76D11725",
+      "B96D1663B9C63E18F8D4D67B",
+      "609D42868CFE64467A2AF7F6"
+    ],
+    "buildRules": [],
+    "dependencies": [],
+    "name": "MomentWidgets",
+    "productName": "MomentWidgets",
+    "productReference": "1E56103C402F73CCF894BA42",
+    "productType": "com.apple.product-type.app-extension"
+  },
+  "2CED208598DB6D07F3E6EC00": {
+    "isa": "PBXBuildFile",
+    "fileRef": "6CAD4DD3CEE3F087DD403C1A"
+  },
+  "CA2BF3E1BA6BE8C90F717535": {
+    "isa": "PBXSourcesBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [
+      "2CED208598DB6D07F3E6EC00"
+    ],
+    "runOnlyForDeploymentPostprocessing": 0
+  },
+  "7101E508566E24C115EBFC7B": {
+    "isa": "PBXFrameworksBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [],
+    "runOnlyForDeploymentPostprocessing": 0
+  },
+  "CA1B749ACA6F0CD8DA511FC0": {
+    "isa": "PBXResourcesBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [],
+    "runOnlyForDeploymentPostprocessing": 0
+  },
+  "38D52D108C52DCF7737B901C": {
+    "isa": "PBXContainerItemProxy",
+    "containerPortal": "98F54143AB4E86B28C3AFEE0",
+    "proxyType": 1,
+    "remoteGlobalIDString": "2BF38DFDAC7FC5E7CC7F71DB",
+    "remoteInfo": "Moment"
+  },
+  "CC7C1F6196EF9ADE4657AA08": {
+    "isa": "PBXTargetDependency",
+    "target": "2BF38DFDAC7FC5E7CC7F71DB",
+    "targetProxy": "38D52D108C52DCF7737B901C"
+  },
+  "B3AC68A6751904F9071E3D47": {
+    "isa": "XCBuildConfiguration",
+    "buildSettings": {
+      "PRODUCT_BUNDLE_IDENTIFIER": "$(MOMENT_BUNDLE_PREFIX).tests",
+      "GENERATE_INFOPLIST_FILE": "YES",
+      "TEST_HOST": "$(BUILT_PRODUCTS_DIR)/Moment.app/Moment",
+      "BUNDLE_LOADER": "$(TEST_HOST)",
+      "LD_RUNPATH_SEARCH_PATHS": [
+        "$(inherited)",
+        "@executable_path/Frameworks",
+        "@loader_path/Frameworks"
+      ],
+      "PRODUCT_NAME": "$(TARGET_NAME)",
+      "SWIFT_EMIT_LOC_STRINGS": "YES"
+    },
+    "name": "Debug",
+    "baseConfigurationReference": "2C94172D67DA116C7BB32C13"
+  },
+  "CC320522BAA46301A759D173": {
+    "isa": "XCBuildConfiguration",
+    "buildSettings": {
+      "PRODUCT_BUNDLE_IDENTIFIER": "$(MOMENT_BUNDLE_PREFIX).tests",
+      "GENERATE_INFOPLIST_FILE": "YES",
+      "TEST_HOST": "$(BUILT_PRODUCTS_DIR)/Moment.app/Moment",
+      "BUNDLE_LOADER": "$(TEST_HOST)",
+      "LD_RUNPATH_SEARCH_PATHS": [
+        "$(inherited)",
+        "@executable_path/Frameworks",
+        "@loader_path/Frameworks"
+      ],
+      "PRODUCT_NAME": "$(TARGET_NAME)",
+      "SWIFT_EMIT_LOC_STRINGS": "YES"
+    },
+    "name": "Release",
+    "baseConfigurationReference": "2C94172D67DA116C7BB32C13"
+  },
+  "34C653D5B874C6C665A6CAA3": {
+    "isa": "XCConfigurationList",
+    "buildConfigurations": [
+      "B3AC68A6751904F9071E3D47",
+      "CC320522BAA46301A759D173"
+    ],
+    "defaultConfigurationIsVisible": 0,
+    "defaultConfigurationName": "Release"
+  },
+  "009F888A3FD85A8B39E760F1": {
+    "isa": "PBXNativeTarget",
+    "buildConfigurationList": "34C653D5B874C6C665A6CAA3",
+    "buildPhases": [
+      "CA2BF3E1BA6BE8C90F717535",
+      "7101E508566E24C115EBFC7B",
+      "CA1B749ACA6F0CD8DA511FC0"
+    ],
+    "buildRules": [],
+    "dependencies": [
+      "CC7C1F6196EF9ADE4657AA08"
+    ],
+    "name": "MomentTests",
+    "productName": "MomentTests",
+    "productReference": "FD656D6FBB1795015C75CFFF",
+    "productType": "com.apple.product-type.bundle.unit-test"
+  },
+  "262E02E3C63E2FBADCBCB6A2": {
+    "isa": "XCBuildConfiguration",
+    "buildSettings": {
+      "CLANG_ENABLE_MODULES": "YES",
+      "CLANG_ENABLE_OBJC_ARC": "YES",
+      "SDKROOT": "iphoneos",
+      "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
+      "GCC_C_LANGUAGE_STANDARD": "gnu17",
+      "SWIFT_VERSION": "5.0",
+      "IPHONEOS_DEPLOYMENT_TARGET": "17.0",
+      "SWIFT_OPTIMIZATION_LEVEL": "-Onone",
+      "DEBUG_INFORMATION_FORMAT": "dwarf",
+      "ENABLE_TESTABILITY": "YES",
+      "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "DEBUG $(inherited)",
+      "ONLY_ACTIVE_ARCH": "YES"
+    },
+    "name": "Debug"
+  },
+  "86E0D76135EE80816AB07AC0": {
+    "isa": "XCBuildConfiguration",
+    "buildSettings": {
+      "CLANG_ENABLE_MODULES": "YES",
+      "CLANG_ENABLE_OBJC_ARC": "YES",
+      "SDKROOT": "iphoneos",
+      "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
+      "GCC_C_LANGUAGE_STANDARD": "gnu17",
+      "SWIFT_VERSION": "5.0",
+      "IPHONEOS_DEPLOYMENT_TARGET": "17.0",
+      "SWIFT_OPTIMIZATION_LEVEL": "-O",
+      "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym",
+      "ENABLE_TESTABILITY": "NO",
+      "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "$(inherited)",
+      "ONLY_ACTIVE_ARCH": "NO"
+    },
+    "name": "Release"
+  },
+  "247BF104A9AD002C539DA531": {
+    "isa": "XCConfigurationList",
+    "buildConfigurations": [
+      "262E02E3C63E2FBADCBCB6A2",
+      "86E0D76135EE80816AB07AC0"
+    ],
+    "defaultConfigurationIsVisible": 0,
+    "defaultConfigurationName": "Release"
+  },
+  "98F54143AB4E86B28C3AFEE0": {
+    "isa": "PBXProject",
+    "attributes": {
+      "BuildIndependentTargetsInParallel": "YES",
+      "LastUpgradeCheck": "1600",
+      "TargetAttributes": {
+        "2BF38DFDAC7FC5E7CC7F71DB": {
+          "CreatedOnToolsVersion": "16.0",
+          "SystemCapabilities": {
+            "com.apple.ApplicationGroups.iOS": {
+              "enabled": 1
+            }
+          }
+        },
+        "CF9D98541DA2260225F71C12": {
+          "CreatedOnToolsVersion": "16.0",
+          "SystemCapabilities": {
+            "com.apple.ApplicationGroups.iOS": {
+              "enabled": 1
+            }
+          }
+        },
+        "009F888A3FD85A8B39E760F1": {
+          "CreatedOnToolsVersion": "16.0",
+          "TestTargetID": "2BF38DFDAC7FC5E7CC7F71DB"
+        }
+      }
+    },
+    "buildConfigurationList": "247BF104A9AD002C539DA531",
+    "compatibilityVersion": "Xcode 14.0",
+    "developmentRegion": "ru",
+    "hasScannedForEncodings": 0,
+    "knownRegions": [
+      "ru",
+      "Base"
+    ],
+    "mainGroup": "DF891E785808226D241F246E",
+    "productRefGroup": "5151B46607EBC8890D8DFCC2",
+    "projectDirPath": "",
+    "projectRoot": "",
+    "targets": [
+      "2BF38DFDAC7FC5E7CC7F71DB",
+      "CF9D98541DA2260225F71C12",
+      "009F888A3FD85A8B39E760F1"
+    ]
+  }
+}

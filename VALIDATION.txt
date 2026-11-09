@@ -1,0 +1,15 @@
+Environment: Linux; macOS, Xcode and iOS SDK unavailable.
+Project generation: deterministic.
+PASS independent OpenStep project parse
+PASS 81 project objects, references and file paths
+PASS app, embedded widget and XCTest target membership/configuration
+PASS Info.plist, deep links, privacy manifest and shared App Group
+PASS shared scheme and opaque 1024px app icon
+PASS Swift syntax parse (14 files; no SDK type checking)
+INFO 9 XCTest cases provided; execution requires Xcode on macOS
+All structural checks passed. iOS build/device validation remains required.
+
+Not run: xcodebuild build, XCTest execution, simulator/device rendering.
+
+IPA packaging: Scripts/build_ipa.sh added; bash syntax and Linux preflight guard passed.
+GitHub macOS workflow prepared; no remote build executed; no IPA produced.
