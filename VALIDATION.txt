@@ -1,31 +1,40 @@
 Moment iOS 1.0.2 build verification
 
 Repository: https://github.com/foxx1cs/moment-ios
-Device archive: https://github.com/foxx1cs/moment-ios/actions/runs/42626814185
-Source commit: 8120495af0afd8a7873a088b106c0406f02b432d
+Successful archive and focused widget UI check:
+https://github.com/foxx1cs/moment-ios/actions/runs/42636937963
+Source commit: 4ef08eb35def5d0b779e651002c9fb664ed23527
 Builder: GitHub-hosted macOS, Xcode 16.4, iPhoneOS 18.5 SDK
-Output: Moment-1.0.2.ipa, 518206 bytes, version 1.0.2 build 3
-SHA-256: 9d5d4328b63a205babab51516ca7b25276c20cec2fe26242f3f6e878ee79a99b
+Output: Moment-1.0.2.ipa, 518215 bytes, version 1.0.2 build 3
+SHA-256: c03fa0a778cd87a7974ad23a53c5060d42638bc932c12dc38d57821c2aecb611
 
 PASS Xcode Release archive for generic iOS device
 PASS application and embedded WidgetKit extension compilation
 PASS App Intents metadata extraction for manual and from-app modes
-PASS both Info.plist files
+PASS both Info.plist files and matching AppGroupIdentifier values
 PASS arm64 executable architecture in both bundles
 PASS minimum iOS 17.0 and iPhoneOS platform in both bundles
 PASS IPA ZIP integrity and expected Payload structure
 PASS independent OpenStep project parsing and structural references
 PASS Swift syntax parsing in 19 files
 
-Test run 42625030037 (same application code, earlier widget UI test harness):
+Test run 42633217195 (identical Swift sources to the device archive):
 PASS all 22 XCTest cases (9 countdown/model + 7 storage + 6 manual widget)
 PASS UI creation through the empty-state button with App Groups unavailable
 PASS event remains visible after terminating and relaunching the app
 PASS + button opens the event editor after relaunch
-INCOMPLETE native widget configuration UI verification: the original automation
-selected an offscreen App Library search field. The selector has been corrected.
-Run 42626814185 attempt 1 timed out before any tests started; attempt 2 pending.
+The full job failed when widget UI automation lost connection to SpringBoard.
 
+Focused widget UI run 42636937963:
+PASS testManualWidgetModeChooserOpens (52.588 seconds)
+PASS adding the widget through the native iPhone widget gallery
+PASS opening Edit Widget and the native mode chooser
+PASS selecting manual mode and finding the date/time field
+PASS screenshot inspection: native mode choices and four manual fields visible
+Screenshots are included in the Moment-test-results artifact.
+
+The 22 unit tests and both UI scenarios are confirmed across the two runs.
+Not covered by UI automation: entering a date and observing a configured timer.
 Not run: physical-device installation of this updated build.
 Unsigned output requires signing. App Groups are optional for app storage and
 manual widget configuration. The from-app event list requires a shared App Group.
