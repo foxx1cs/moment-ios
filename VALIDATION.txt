@@ -1,15 +1,21 @@
-Environment: Linux; macOS, Xcode and iOS SDK unavailable.
-Project generation: deterministic.
-PASS independent OpenStep project parse
-PASS 81 project objects, references and file paths
-PASS app, embedded widget and XCTest target membership/configuration
-PASS Info.plist, deep links, privacy manifest and shared App Group
-PASS shared scheme and opaque 1024px app icon
-PASS Swift syntax parse (14 files; no SDK type checking)
-INFO 9 XCTest cases provided; execution requires Xcode on macOS
-All structural checks passed. iOS build/device validation remains required.
+Moment iOS build verification
 
-Not run: xcodebuild build, XCTest execution, simulator/device rendering.
+Repository: https://github.com/foxx1cs/moment-ios
+Successful run: https://github.com/foxx1cs/moment-ios/actions/runs/42611725350
+Source commit: fb6cf704c8f201cc4977f14407558c36722852eb
+Builder: GitHub-hosted macOS, Xcode 16.4, iPhoneOS 18.5 SDK
+Output: Moment-unsigned.ipa, 504930 bytes
+SHA-256: 268837b5386f470737aa8fb643e572b4ac35b95d8357e8f358d76ce3eea846e8
 
-IPA packaging: Scripts/build_ipa.sh added; bash syntax and Linux preflight guard passed.
-GitHub macOS workflow prepared; no remote build executed; no IPA produced.
+PASS Xcode Release archive for generic iOS device
+PASS application and embedded WidgetKit extension compilation
+PASS both Info.plist files
+PASS arm64 executable architecture in both bundles
+PASS minimum iOS 17.0 and iPhoneOS platform in both bundles
+PASS matching AppGroupIdentifier values
+PASS IPA ZIP integrity and expected Payload structure
+PASS independent OpenStep project parsing and structural references
+PASS Swift syntax parsing in 14 files
+
+Not run: 9 provided XCTest cases, simulator rendering, physical-device installation.
+Unsigned output requires signing. App Groups provisioning is necessary for storage and widgets.
