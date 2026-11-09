@@ -11,13 +11,11 @@ permissions:
 jobs:
   build:
     runs-on: macos-15-intel
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - name: Show Xcode version
         run: xcodebuild -version
-      - name: Test persistence and event creation without App Groups
-        run: bash Scripts/test_ios.sh
       - name: Build device archive and package IPA
         run: bash Scripts/build_ipa.sh
       - name: Upload unsigned IPA
@@ -36,6 +34,21 @@ jobs:
           path: build/ipa-build.log
           if-no-files-found: ignore
           retention-days: 7
+
+  test:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Boot iPhone simulator
+        timeout-minutes: 10
+        run: bash Scripts/test_ios.sh prepare
+      - name: Build test applications
+        timeout-minutes: 10
+        run: bash Scripts/test_ios.sh build
+      - name: Verify local persistence and event creation without App Groups
+        timeout-minutes: 6
+        run: bash Scripts/test_ios.sh run
       - name: Export test screenshots
         if: always()
         continue-on-error: true
@@ -49,7 +62,8 @@ jobs:
         with:
           name: Moment-test-results
           path: |
-            build/test-ios.log
+            build/test-ios-*.log
+            build/simulator-boot.log
             build/Moment-tests.xcresult
             build/test-attachments
           if-no-files-found: ignore
