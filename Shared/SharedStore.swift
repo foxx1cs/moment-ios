@@ -24,6 +24,17 @@ struct SharedStore {
 
     init(fileURL: URL) { self.fileURL = fileURL }
 
+    var hasArchive: Bool { FileManager.default.fileExists(atPath: fileURL.path) }
+
+    static func local(fileName: String = "events-v1.json") throws -> SharedStore {
+        let support = try FileManager.default.url(for: .applicationSupportDirectory,
+                                                 in: .userDomainMask,
+                                                 appropriateFor: nil, create: true)
+        let directory = support.appendingPathComponent("Moment", isDirectory: true)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        return SharedStore(fileURL: directory.appendingPathComponent(fileName))
+    }
+
     static func live() throws -> SharedStore {
         guard let group = Bundle.main.object(forInfoDictionaryKey: "AppGroupIdentifier") as? String,
               let container = FileManager.default.containerURL(

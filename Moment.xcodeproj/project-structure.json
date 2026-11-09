@@ -83,6 +83,18 @@
     "sourceTree": "<group>",
     "lastKnownFileType": "sourcecode.swift"
   },
+  "28F41A205EF8396199C86DC1": {
+    "isa": "PBXFileReference",
+    "path": "MomentTests/EventStoreTests.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "4C7D3B78282A2A11AA22B631": {
+    "isa": "PBXFileReference",
+    "path": "MomentUITests/EventCreationUITests.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
   "B4E5998C67ADF64E0E9F2043": {
     "isa": "PBXFileReference",
     "path": "Moment/Assets.xcassets",
@@ -140,6 +152,13 @@
     "path": "MomentTests.xctest",
     "sourceTree": "BUILT_PRODUCTS_DIR"
   },
+  "42E45EB3566FEB7B78FB9103": {
+    "isa": "PBXFileReference",
+    "explicitFileType": "wrapper.cfbundle",
+    "includeInIndex": 0,
+    "path": "MomentUITests.xctest",
+    "sourceTree": "BUILT_PRODUCTS_DIR"
+  },
   "A0233C3C2E52780D419DE39D": {
     "isa": "PBXGroup",
     "children": [
@@ -179,10 +198,19 @@
   "6FC809F6DFDAA89769AD1CF1": {
     "isa": "PBXGroup",
     "children": [
-      "6CAD4DD3CEE3F087DD403C1A"
+      "6CAD4DD3CEE3F087DD403C1A",
+      "28F41A205EF8396199C86DC1"
     ],
     "sourceTree": "<group>",
     "name": "MomentTests"
+  },
+  "42CDA48D68C32DD8CEB12B79": {
+    "isa": "PBXGroup",
+    "children": [
+      "4C7D3B78282A2A11AA22B631"
+    ],
+    "sourceTree": "<group>",
+    "name": "MomentUITests"
   },
   "5619E268CFFE28118C19FC6A": {
     "isa": "PBXGroup",
@@ -200,7 +228,8 @@
     "children": [
       "3A074E7470903A8683F7B854",
       "1E56103C402F73CCF894BA42",
-      "FD656D6FBB1795015C75CFFF"
+      "FD656D6FBB1795015C75CFFF",
+      "42E45EB3566FEB7B78FB9103"
     ],
     "sourceTree": "<group>",
     "name": "Products"
@@ -218,6 +247,7 @@
       "44C7E229889FE9D1BB841A79",
       "270318E5C8FE346CC9E1CF70",
       "6FC809F6DFDAA89769AD1CF1",
+      "42CDA48D68C32DD8CEB12B79",
       "5619E268CFFE28118C19FC6A",
       "5151B46607EBC8890D8DFCC2",
       "AA4ACA445B3FBAF47CDE31AC"
@@ -517,11 +547,16 @@
     "isa": "PBXBuildFile",
     "fileRef": "6CAD4DD3CEE3F087DD403C1A"
   },
+  "90F7AE602176D03D3551C02E": {
+    "isa": "PBXBuildFile",
+    "fileRef": "28F41A205EF8396199C86DC1"
+  },
   "CA2BF3E1BA6BE8C90F717535": {
     "isa": "PBXSourcesBuildPhase",
     "buildActionMask": 2147483647,
     "files": [
-      "2CED208598DB6D07F3E6EC00"
+      "2CED208598DB6D07F3E6EC00",
+      "90F7AE602176D03D3551C02E"
     ],
     "runOnlyForDeploymentPostprocessing": 0
   },
@@ -611,6 +646,102 @@
     "productReference": "FD656D6FBB1795015C75CFFF",
     "productType": "com.apple.product-type.bundle.unit-test"
   },
+  "393F8CDD04C135416368C25A": {
+    "isa": "PBXBuildFile",
+    "fileRef": "4C7D3B78282A2A11AA22B631"
+  },
+  "691BBC8FC662107CB573E08F": {
+    "isa": "PBXSourcesBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [
+      "393F8CDD04C135416368C25A"
+    ],
+    "runOnlyForDeploymentPostprocessing": 0
+  },
+  "2CC0DCCD53C6B2061229CB8D": {
+    "isa": "PBXFrameworksBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [],
+    "runOnlyForDeploymentPostprocessing": 0
+  },
+  "CDCBB3CF6224C1FA520E53E4": {
+    "isa": "PBXResourcesBuildPhase",
+    "buildActionMask": 2147483647,
+    "files": [],
+    "runOnlyForDeploymentPostprocessing": 0
+  },
+  "132C5102FDD0CF49BC5BFEA6": {
+    "isa": "PBXContainerItemProxy",
+    "containerPortal": "98F54143AB4E86B28C3AFEE0",
+    "proxyType": 1,
+    "remoteGlobalIDString": "2BF38DFDAC7FC5E7CC7F71DB",
+    "remoteInfo": "Moment"
+  },
+  "6CBC0732350589F4634A9E2E": {
+    "isa": "PBXTargetDependency",
+    "target": "2BF38DFDAC7FC5E7CC7F71DB",
+    "targetProxy": "132C5102FDD0CF49BC5BFEA6"
+  },
+  "82BEFBC81AACD819F0F680BD": {
+    "isa": "XCBuildConfiguration",
+    "buildSettings": {
+      "PRODUCT_BUNDLE_IDENTIFIER": "$(MOMENT_BUNDLE_PREFIX).uitests",
+      "GENERATE_INFOPLIST_FILE": "YES",
+      "TEST_TARGET_NAME": "Moment",
+      "LD_RUNPATH_SEARCH_PATHS": [
+        "$(inherited)",
+        "@executable_path/Frameworks",
+        "@loader_path/Frameworks"
+      ],
+      "PRODUCT_NAME": "$(TARGET_NAME)",
+      "SWIFT_EMIT_LOC_STRINGS": "YES"
+    },
+    "name": "Debug",
+    "baseConfigurationReference": "2C94172D67DA116C7BB32C13"
+  },
+  "0A90D17C23E913EB99778CF7": {
+    "isa": "XCBuildConfiguration",
+    "buildSettings": {
+      "PRODUCT_BUNDLE_IDENTIFIER": "$(MOMENT_BUNDLE_PREFIX).uitests",
+      "GENERATE_INFOPLIST_FILE": "YES",
+      "TEST_TARGET_NAME": "Moment",
+      "LD_RUNPATH_SEARCH_PATHS": [
+        "$(inherited)",
+        "@executable_path/Frameworks",
+        "@loader_path/Frameworks"
+      ],
+      "PRODUCT_NAME": "$(TARGET_NAME)",
+      "SWIFT_EMIT_LOC_STRINGS": "YES"
+    },
+    "name": "Release",
+    "baseConfigurationReference": "2C94172D67DA116C7BB32C13"
+  },
+  "7D2246459C2FA8CAAF2F6645": {
+    "isa": "XCConfigurationList",
+    "buildConfigurations": [
+      "82BEFBC81AACD819F0F680BD",
+      "0A90D17C23E913EB99778CF7"
+    ],
+    "defaultConfigurationIsVisible": 0,
+    "defaultConfigurationName": "Release"
+  },
+  "957C48375E49199F6673C6AF": {
+    "isa": "PBXNativeTarget",
+    "buildConfigurationList": "7D2246459C2FA8CAAF2F6645",
+    "buildPhases": [
+      "691BBC8FC662107CB573E08F",
+      "2CC0DCCD53C6B2061229CB8D",
+      "CDCBB3CF6224C1FA520E53E4"
+    ],
+    "buildRules": [],
+    "dependencies": [
+      "6CBC0732350589F4634A9E2E"
+    ],
+    "name": "MomentUITests",
+    "productName": "MomentUITests",
+    "productReference": "42E45EB3566FEB7B78FB9103",
+    "productType": "com.apple.product-type.bundle.ui-testing"
+  },
   "262E02E3C63E2FBADCBCB6A2": {
     "isa": "XCBuildConfiguration",
     "buildSettings": {
@@ -681,6 +812,10 @@
         "009F888A3FD85A8B39E760F1": {
           "CreatedOnToolsVersion": "16.0",
           "TestTargetID": "2BF38DFDAC7FC5E7CC7F71DB"
+        },
+        "957C48375E49199F6673C6AF": {
+          "CreatedOnToolsVersion": "16.0",
+          "TestTargetID": "2BF38DFDAC7FC5E7CC7F71DB"
         }
       }
     },
@@ -699,7 +834,8 @@
     "targets": [
       "2BF38DFDAC7FC5E7CC7F71DB",
       "CF9D98541DA2260225F71C12",
-      "009F888A3FD85A8B39E760F1"
+      "009F888A3FD85A8B39E760F1",
+      "957C48375E49199F6673C6AF"
     ]
   }
 }

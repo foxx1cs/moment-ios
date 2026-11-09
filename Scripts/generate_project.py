@@ -79,7 +79,7 @@ def generate():
     PROJECT.mkdir(exist_ok=True)
     file_groups = {}
     refs = {}
-    for folder in ["Moment", "Shared", "MomentWidgets", "MomentTests"]:
+    for folder in ["Moment", "Shared", "MomentWidgets", "MomentTests", "MomentUITests"]:
         children = []
         for path in sorted((ROOT / folder).glob("*.swift")):
             item = ref(folder + "/" + path.name, "sourcecode.swift")
@@ -97,7 +97,8 @@ def generate():
     products = {}
     for name, suffix, file_type in [("Moment", ".app", "wrapper.application"),
                                     ("MomentWidgets", ".appex", "wrapper.app-extension"),
-                                    ("MomentTests", ".xctest", "wrapper.cfbundle")]:
+                                    ("MomentTests", ".xctest", "wrapper.cfbundle"),
+                                    ("MomentUITests", ".xctest", "wrapper.cfbundle")]:
         products[name] = obj("product:" + name, "PBXFileReference", explicitFileType=file_type,
                              includeInIndex=0, path=name + suffix, sourceTree="BUILT_PRODUCTS_DIR")
     groups = [group(name, children) for name, children in file_groups.items()]
@@ -130,11 +131,17 @@ def generate():
             "BUNDLE_LOADER": "$(TEST_HOST)",
             "LD_RUNPATH_SEARCH_PATHS": ["$(inherited)", "@executable_path/Frameworks", "@loader_path/Frameworks"],
         },
+        "MomentUITests": {
+            "PRODUCT_BUNDLE_IDENTIFIER": "$(MOMENT_BUNDLE_PREFIX).uitests",
+            "GENERATE_INFOPLIST_FILE": "YES",
+            "TEST_TARGET_NAME": "Moment",
+            "LD_RUNPATH_SEARCH_PATHS": ["$(inherited)", "@executable_path/Frameworks", "@loader_path/Frameworks"],
+        },
     }
     targets = []
     for name, settings in target_settings.items():
         own = sorted(path for path in refs if path.startswith(name + "/"))
-        paths = own + (shared_paths if name != "MomentTests" else [])
+        paths = own + (shared_paths if name not in {"MomentTests", "MomentUITests"} else [])
         sources = phase(name + ":sources", "PBXSourcesBuildPhase",
                         [build(name + ":" + path, refs[path]) for path in paths])
         frameworks = phase(name + ":frameworks", "PBXFrameworksBuildPhase", [])
@@ -149,7 +156,7 @@ def generate():
             phases.append(phase("embed:widgets", "PBXCopyFilesBuildPhase", [embedded],
                                 dstPath="", dstSubfolderSpec=13, name="Embed App Extensions"))
             dependencies.append(dependency(name, "MomentWidgets"))
-        elif name == "MomentTests":
+        elif name in {"MomentTests", "MomentUITests"}:
             dependencies.append(dependency(name, "Moment"))
         settings.update({"PRODUCT_NAME": "$(TARGET_NAME)", "SWIFT_EMIT_LOC_STRINGS": "YES"})
         targets.append(obj("target:" + name, "PBXNativeTarget",
@@ -158,7 +165,8 @@ def generate():
                            name=name, productName=name, productReference=products[name],
                            productType={"Moment": "com.apple.product-type.application",
                                         "MomentWidgets": "com.apple.product-type.app-extension",
-                                        "MomentTests": "com.apple.product-type.bundle.unit-test"}[name]))
+                                        "MomentTests": "com.apple.product-type.bundle.unit-test",
+                                        "MomentUITests": "com.apple.product-type.bundle.ui-testing"}[name]))
 
     project_configs = config_list("project", {
         "CLANG_ENABLE_MODULES": "YES", "CLANG_ENABLE_OBJC_ARC": "YES",
@@ -174,6 +182,7 @@ def generate():
             ident("target:MomentWidgets"): {"CreatedOnToolsVersion": "16.0", "SystemCapabilities": {
                 "com.apple.ApplicationGroups.iOS": {"enabled": 1}}},
             ident("target:MomentTests"): {"CreatedOnToolsVersion": "16.0", "TestTargetID": ident("target:Moment")},
+            ident("target:MomentUITests"): {"CreatedOnToolsVersion": "16.0", "TestTargetID": ident("target:Moment")},
         }}, buildConfigurationList=project_configs, compatibilityVersion="Xcode 14.0",
         developmentRegion="ru", hasScannedForEncodings=0, knownRegions=["ru", "Base"],
         mainGroup=root_group, productRefGroup=ident("group:Products"),
@@ -213,15 +222,17 @@ def generate():
     entry = ET.SubElement(entries, "BuildActionEntry", buildForTesting="YES", buildForRunning="YES",
                           buildForProfiling="YES", buildForArchiving="YES", buildForAnalyzing="YES")
     buildable(entry, "Moment")
-    test_entry = ET.SubElement(entries, "BuildActionEntry", buildForTesting="YES", buildForRunning="NO",
-                               buildForProfiling="NO", buildForArchiving="NO", buildForAnalyzing="YES")
-    buildable(test_entry, "MomentTests")
+    for test_target in ["MomentTests", "MomentUITests"]:
+        test_entry = ET.SubElement(entries, "BuildActionEntry", buildForTesting="YES", buildForRunning="NO",
+                                   buildForProfiling="NO", buildForArchiving="NO", buildForAnalyzing="YES")
+        buildable(test_entry, test_target)
     test = ET.SubElement(scheme, "TestAction", buildConfiguration="Debug",
                          selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB",
                          selectedLauncherIdentifier="Xcode.DebuggerFoundation.Launcher.LLDB",
                          shouldUseLaunchSchemeArgsEnv="YES")
     tests = ET.SubElement(test, "Testables")
-    buildable(ET.SubElement(tests, "TestableReference", skipped="NO"), "MomentTests")
+    for test_target in ["MomentTests", "MomentUITests"]:
+        buildable(ET.SubElement(tests, "TestableReference", skipped="NO"), test_target)
     launch = ET.SubElement(scheme, "LaunchAction", buildConfiguration="Debug",
                            selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB",
                            selectedLauncherIdentifier="Xcode.DebuggerFoundation.Launcher.LLDB",

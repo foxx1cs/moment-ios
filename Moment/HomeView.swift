@@ -19,6 +19,8 @@ struct HomeView: View {
                                 EventHero(event: event, now: context.date)
                             }
                             .buttonStyle(.plain)
+                            .accessibilityIdentifier("featuredEvent")
+                            .accessibilityLabel(event.title)
                             .accessibilityHint("Открыть событие")
                         } else {
                             emptyHero
@@ -43,10 +45,11 @@ struct HomeView: View {
             .sheet(isPresented: $showEditor) { EventEditor() }
             .sheet(isPresented: $showGuide) { WidgetGuide() }
             .sheet(item: $selectedEvent) { EventDetail(eventID: $0.id) }
-            .alert("Не удалось сохранить данные", isPresented: Binding(
+            .alert(store.isLoaded ? "Не удалось сохранить данные" : "Не удалось открыть данные", isPresented: Binding(
                 get: { store.errorMessage != nil },
                 set: { if !$0 { store.errorMessage = nil } }
             )) {
+                if !store.isLoaded { Button("Повторить") { store.reload() } }
                 Button("Понятно") { store.errorMessage = nil }
             } message: { Text(store.errorMessage ?? "") }
             .onChange(of: scenePhase) { _, phase in
@@ -78,6 +81,7 @@ struct HomeView: View {
                     .background(Palette.surface, in: Circle())
             }
             .accessibilityLabel("Создать событие")
+            .accessibilityIdentifier("addEventButton")
             .disabled(!store.isLoaded)
         }
     }
@@ -100,6 +104,7 @@ struct HomeView: View {
                     .foregroundStyle(.white)
                     .background(Palette.ink, in: Capsule())
             }
+            .accessibilityIdentifier("createEventButton")
             .disabled(!store.isLoaded)
         }
         .foregroundStyle(Palette.ink)
@@ -151,8 +156,10 @@ struct HomeView: View {
                     .font(.system(size: 25, weight: .light))
                     .foregroundStyle(Palette.aqua)
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Всегда перед глазами").font(.system(size: 14, weight: .semibold))
-                    Text("Отсчёт на экране блокировки").font(.system(size: 11))
+                    Text(store.widgetsAvailable ? "Всегда перед глазами" : "События на вашем iPhone")
+                        .font(.system(size: 14, weight: .semibold))
+                    Text(store.widgetsAvailable ? "Отсчёт на экране блокировки" : "Виджеты недоступны в этой установке")
+                        .font(.system(size: 11))
                         .foregroundStyle(Palette.muted)
                 }
                 Spacer(minLength: 0)

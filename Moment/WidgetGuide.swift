@@ -1,12 +1,24 @@
 import SwiftUI
 
 struct WidgetGuide: View {
+    @EnvironmentObject private var store: EventStore
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
+                    if !store.widgetsAvailable {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Label("События сохраняются на iPhone", systemImage: "checkmark.shield")
+                                .font(.headline)
+                            Text("Эта установка не поддерживает виджеты. Создавайте и редактируйте события в приложении — они сохранятся после закрытия.")
+                                .font(.subheadline)
+                        }
+                        .foregroundStyle(Palette.aqua)
+                        .padding(20)
+                        .background(Palette.surface, in: RoundedRectangle(cornerRadius: 20))
+                    }
                     VStack(spacing: 18) {
                         Image(systemName: "lock.fill").font(.title2).foregroundStyle(Palette.aqua)
                         Text("Ближе с каждой\nсекундой.")

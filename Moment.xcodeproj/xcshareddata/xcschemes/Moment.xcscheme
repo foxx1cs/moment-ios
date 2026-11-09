@@ -8,12 +8,18 @@
       <BuildActionEntry buildForTesting="YES" buildForRunning="NO" buildForProfiling="NO" buildForArchiving="NO" buildForAnalyzing="YES">
         <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="009F888A3FD85A8B39E760F1" BuildableName="MomentTests.xctest" BlueprintName="MomentTests" ReferencedContainer="container:Moment.xcodeproj" />
       </BuildActionEntry>
+      <BuildActionEntry buildForTesting="YES" buildForRunning="NO" buildForProfiling="NO" buildForArchiving="NO" buildForAnalyzing="YES">
+        <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="957C48375E49199F6673C6AF" BuildableName="MomentUITests.xctest" BlueprintName="MomentUITests" ReferencedContainer="container:Moment.xcodeproj" />
+      </BuildActionEntry>
     </BuildActionEntries>
   </BuildAction>
   <TestAction buildConfiguration="Debug" selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB" selectedLauncherIdentifier="Xcode.DebuggerFoundation.Launcher.LLDB" shouldUseLaunchSchemeArgsEnv="YES">
     <Testables>
       <TestableReference skipped="NO">
         <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="009F888A3FD85A8B39E760F1" BuildableName="MomentTests.xctest" BlueprintName="MomentTests" ReferencedContainer="container:Moment.xcodeproj" />
+      </TestableReference>
+      <TestableReference skipped="NO">
+        <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="957C48375E49199F6673C6AF" BuildableName="MomentUITests.xctest" BlueprintName="MomentUITests" ReferencedContainer="container:Moment.xcodeproj" />
       </TestableReference>
     </Testables>
   </TestAction>

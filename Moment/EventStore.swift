@@ -6,15 +6,62 @@ final class EventStore: ObservableObject {
     @Published private(set) var archive = EventArchive()
     @Published var errorMessage: String?
     @Published private(set) var isLoaded = false
+    @Published private(set) var widgetsAvailable = false
 
-    init() { reload() }
+    private let localStoreProvider: () throws -> SharedStore
+    private let sharedStoreProvider: () throws -> SharedStore
+    private let reloadWidgets: () -> Void
+
+    convenience init() {
+        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("--ui-testing-no-app-group") {
+            var shouldReset = ProcessInfo.processInfo.arguments.contains("--ui-testing-reset")
+            self.init(localStoreProvider: {
+                let local = try SharedStore.local(fileName: "ui-tests-events.json")
+                if shouldReset {
+                    try local.write(EventArchive())
+                    shouldReset = false
+                }
+                return local
+            }, sharedStoreProvider: { throw SharedStoreError.unavailableGroup })
+            return
+        }
+        #endif
+        self.init(localStoreProvider: { try SharedStore.local() },
+                  sharedStoreProvider: { try SharedStore.live() })
+    }
+
+    init(localStoreProvider: @escaping () throws -> SharedStore,
+         sharedStoreProvider: @escaping () throws -> SharedStore,
+         reloadWidgets: @escaping () -> Void = {
+             WidgetCenter.shared.reloadTimelines(ofKind: SharedStore.widgetKind)
+         }) {
+        self.localStoreProvider = localStoreProvider
+        self.sharedStoreProvider = sharedStoreProvider
+        self.reloadWidgets = reloadWidgets
+        reload()
+    }
 
     func reload() {
         do {
-            archive = try SharedStore.live().read()
+            let local = try localStoreProvider()
+            if !local.hasArchive {
+                // Preserve events created by versions that stored only in App Groups.
+                let initial: EventArchive
+                do {
+                    initial = try sharedStoreProvider().read()
+                } catch SharedStoreError.unavailableGroup {
+                    initial = EventArchive()
+                }
+                try local.write(initial)
+            }
+            archive = try local.read()
             isLoaded = true
+            errorMessage = nil
+            syncWidgets()
         } catch {
             isLoaded = false
+            widgetsAvailable = false
             errorMessage = error.localizedDescription
         }
     }
@@ -54,13 +101,28 @@ final class EventStore: ObservableObject {
             return false
         }
         do {
-            try SharedStore.live().write(next)
+            // Saving in the app never depends on widget provisioning or sync.
+            try localStoreProvider().write(next)
             archive = next
-            WidgetCenter.shared.reloadTimelines(ofKind: SharedStore.widgetKind)
+            syncWidgets()
             return true
         } catch {
             errorMessage = error.localizedDescription
             return false
+        }
+    }
+
+    private func syncWidgets() {
+        do {
+            let shared = try sharedStoreProvider()
+            // Do not replace an unreadable pre-existing archive silently.
+            _ = try shared.read()
+            try shared.write(archive)
+            widgetsAvailable = true
+            reloadWidgets()
+        } catch {
+            widgetsAvailable = false
+            // Widget failures are nonfatal: the local save is already durable.
         }
     }
 }

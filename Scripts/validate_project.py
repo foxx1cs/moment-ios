@@ -54,7 +54,7 @@ def main():
     print(f"PASS {len(objects)} project objects, references and file paths")
 
     targets = {obj["name"]: obj for obj in objects.values() if obj["isa"] == "PBXNativeTarget"}
-    check(set(targets) == {"Moment", "MomentWidgets", "MomentTests"}, "Incorrect targets")
+    check(set(targets) == {"Moment", "MomentWidgets", "MomentTests", "MomentUITests"}, "Incorrect targets")
     shared = {str(path.relative_to(ROOT)) for path in (ROOT / "Shared").glob("*.swift")}
     for name, target in targets.items():
         phases = [objects[key] for key in target["buildPhases"]]
@@ -62,7 +62,7 @@ def main():
         check(len(source_phases) == 1, f"Source phase missing in {name}")
         sources = {objects[objects[key]["fileRef"]]["path"] for key in source_phases[0]["files"]}
         expected = {str(path.relative_to(ROOT)) for path in (ROOT / name).glob("*.swift")}
-        if name != "MomentTests":
+        if name not in {"MomentTests", "MomentUITests"}:
             expected |= shared
         check(sources == expected, f"Incorrect source membership in {name}")
         configs = objects[target["buildConfigurationList"]]["buildConfigurations"]
@@ -70,7 +70,7 @@ def main():
             config = objects[config_key]
             check(objects[config["baseConfigurationReference"]]["path"] == "Config/Shared.xcconfig",
                   f"Missing shared configuration for {name}")
-            if name != "MomentTests":
+            if name not in {"MomentTests", "MomentUITests"}:
                 settings = config["buildSettings"]
                 check(settings["CODE_SIGN_ENTITLEMENTS"] == "Config/Moment.entitlements", "Different group entitlements")
         if name == "Moment":
@@ -80,7 +80,7 @@ def main():
                   "Wrong embedded extension product")
             deps = [objects[objects[key]["target"]]["name"] for key in target["dependencies"]]
             check("MomentWidgets" in deps, "Missing extension build dependency")
-        if name == "MomentTests":
+        if name in {"MomentTests", "MomentUITests"}:
             deps = [objects[objects[key]["target"]]["name"] for key in target["dependencies"]]
             check("Moment" in deps, "Tests missing app dependency")
     print("PASS app, embedded widget and XCTest target membership/configuration")
@@ -101,7 +101,8 @@ def main():
     scheme = ET.parse(project_dir / "xcshareddata/xcschemes/Moment.xcscheme").getroot()
     check(scheme.find("LaunchAction/BuildableProductRunnable/BuildableReference").get("BlueprintName") == "Moment",
           "Wrong launch scheme")
-    check(scheme.find("TestAction/Testables/TestableReference/BuildableReference").get("BlueprintName") == "MomentTests",
+    check({ref.get("BlueprintName") for ref in scheme.findall("TestAction/Testables/TestableReference/BuildableReference")}
+          == {"MomentTests", "MomentUITests"},
           "Wrong test scheme")
     for catalog in (ROOT / "Moment/Assets.xcassets").rglob("Contents.json"):
         content = json.loads(catalog.read_text())
@@ -134,7 +135,8 @@ def main():
             walk(tree.root_node)
         print(f"PASS Swift syntax parse ({len(files)} files; no SDK type checking)")
 
-    tests = len(re.findall(r"func test\w+\(", (ROOT / "MomentTests/CountdownTests.swift").read_text()))
+    tests = sum(len(re.findall(r"func test\w+\(", file.read_text()))
+                for folder in ["MomentTests", "MomentUITests"] for file in (ROOT / folder).glob("*.swift"))
     print(f"INFO {tests} XCTest cases provided; execution requires Xcode on macOS")
     print("All structural checks passed. iOS build/device validation remains required.")
 

@@ -47,6 +47,7 @@ struct EventEditor: View {
                             .font(.headline).focused($focusedField, equals: .title)
                             .onChange(of: title) { _, value in title = String(value.prefix(60)) }
                             .accessibilityLabel("Название события")
+                            .accessibilityIdentifier("eventTitleField")
                     }
                 } header: { Text("Чего ждём?") }
                 Section {
@@ -118,6 +119,7 @@ struct EventEditor: View {
                 ToolbarItem(placement: .cancellationAction) { Button("Отмена") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Сохранить", action: save)
+                        .accessibilityIdentifier("saveEventButton")
                         .fontWeight(.semibold)
                         .disabled(cleanTitle.isEmpty || targetDate <= .now || !store.isLoaded)
                 }
