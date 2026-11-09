@@ -30,13 +30,17 @@ struct CountdownEvent: Identifiable, Codable, Equatable, Sendable {
         return min(1, max(0, now.timeIntervalSince(createdAt) / duration))
     }
 
-    static let preview = CountdownEvent(
-        id: UUID(uuidString: "C6342364-284D-4520-A280-7F20562EE36F")!,
-        title: "Большое путешествие",
-        date: Date.now.addingTimeInterval(9 * 86400 + 7 * 3600 + 32 * 60 + 8),
-        createdAt: Date.now.addingTimeInterval(-5 * 86400),
-        symbol: "airplane", theme: .aqua
-    )
+    static let preview: CountdownEvent = {
+        let now = Date.now
+        let remaining: TimeInterval = 804_728 // 9 days, 7 hours, 32 minutes, 8 seconds
+        return CountdownEvent(
+            id: UUID(uuidString: "C6342364-284D-4520-A280-7F20562EE36F")!,
+            title: "Большое путешествие",
+            date: now.addingTimeInterval(remaining),
+            createdAt: now.addingTimeInterval(-432_000),
+            symbol: "airplane", theme: .aqua
+        )
+    }()
 }
 
 enum EventTheme: String, Codable, CaseIterable, Identifiable, Sendable {

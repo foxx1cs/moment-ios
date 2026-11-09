@@ -15,7 +15,7 @@ struct WidgetGuide: View {
                         VStack(alignment: .leading, spacing: 7) {
                             Label("Большое путешествие", systemImage: "airplane")
                                 .font(.system(size: 13, weight: .medium))
-                            Text(timerInterval: Date.now...Date.now.addingTimeInterval(9 * 86400 + 7 * 3600),
+                            Text(timerInterval: Date.now...Date.now.addingTimeInterval(802_800),
                                  countsDown: true, showsHours: true)
                                 .font(.system(size: 33, weight: .light, design: .rounded)).monospacedDigit()
                             Text("ЧАСЫ : МИНУТЫ : СЕКУНДЫ")

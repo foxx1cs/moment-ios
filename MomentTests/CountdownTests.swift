@@ -5,7 +5,7 @@ final class CountdownTests: XCTestCase {
     private let now = Date(timeIntervalSince1970: 1_800_000_000)
 
     func testDecomposesDaysHoursMinutesSeconds() {
-        let delta = TimeInterval(9 * 86400 + 7 * 3600 + 32 * 60 + 8)
+        let delta: TimeInterval = 804_728
         let result = CountdownComponents(deadline: now.addingTimeInterval(delta), now: now)
         XCTAssertEqual(result.days, 9)
         XCTAssertEqual(result.hours, 7)
