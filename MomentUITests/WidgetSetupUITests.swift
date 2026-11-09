@@ -2,7 +2,7 @@ import XCTest
 
 final class WidgetSetupUITests: XCTestCase {
     @MainActor
-    func testManualWidgetModeChooserOpens() {
+    func testManualWidgetModeChooserOpens() throws {
         continueAfterFailure = false
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing-no-app-group", "--ui-testing-reset"]
@@ -27,12 +27,14 @@ final class WidgetSetupUITests: XCTestCase {
         XCTAssertTrue(addWidget.waitForExistence(timeout: 5), home.debugDescription)
         addWidget.tap()
 
-        let search = home.searchFields.firstMatch
-        XCTAssertTrue(search.waitForExistence(timeout: 5), home.debugDescription)
+        XCTAssertTrue(home.searchFields.firstMatch.waitForExistence(timeout: 5), home.debugDescription)
+        // SpringBoard also exposes offscreen App Library search fields.
+        let search = try XCTUnwrap(home.searchFields.allElementsBoundByIndex.first(where: { $0.isHittable }), home.debugDescription)
         search.tap()
         search.typeText("Moment")
-        let result = home.staticTexts["Moment"].firstMatch
-        XCTAssertTrue(result.waitForExistence(timeout: 10), home.debugDescription)
+        let results = home.staticTexts.matching(identifier: "Moment")
+        XCTAssertTrue(results.firstMatch.waitForExistence(timeout: 10), home.debugDescription)
+        let result = try XCTUnwrap(results.allElementsBoundByIndex.first(where: { $0.isHittable }), home.debugDescription)
         result.tap()
         let addSelected = home.buttons["Add Widget"]
         XCTAssertTrue(addSelected.waitForExistence(timeout: 5), home.debugDescription)
@@ -50,9 +52,12 @@ final class WidgetSetupUITests: XCTestCase {
         XCTAssertTrue(editWidget.waitForExistence(timeout: 5), home.debugDescription)
         editWidget.tap()
 
-        let manual = home.descendants(matching: .any)
-            .matching(NSPredicate(format: "label CONTAINS %@", "Вручную")).firstMatch
-        XCTAssertTrue(manual.waitForExistence(timeout: 5), home.debugDescription)
+        let manualRows = home.descendants(matching: .any).matching(NSPredicate(
+            format: "label == %@ OR (label BEGINSWITH %@ AND label CONTAINS %@)",
+            "Вручную", "Настройка", "Вручную"
+        ))
+        XCTAssertTrue(manualRows.firstMatch.waitForExistence(timeout: 5), home.debugDescription)
+        let manual = try XCTUnwrap(manualRows.allElementsBoundByIndex.first(where: { $0.isHittable }), home.debugDescription)
         manual.tap()
         let fromApp = home.descendants(matching: .any)
             .matching(NSPredicate(format: "label BEGINSWITH %@", "Из приложения")).firstMatch
@@ -62,9 +67,10 @@ final class WidgetSetupUITests: XCTestCase {
         chooser.lifetime = .keepAlways
         add(chooser)
 
-        let manualChoice = home.descendants(matching: .any)
-            .matching(NSPredicate(format: "label BEGINSWITH %@", "Вручную")).firstMatch
-        XCTAssertTrue(manualChoice.exists)
+        let choices = home.descendants(matching: .any).matching(NSPredicate(
+            format: "label BEGINSWITH %@ AND NOT label CONTAINS %@", "Вручную", "Вручную:"
+        ))
+        let manualChoice = try XCTUnwrap(choices.allElementsBoundByIndex.first(where: { $0.isHittable }), home.debugDescription)
         manualChoice.tap()
         let date = home.descendants(matching: .any)
             .matching(NSPredicate(format: "label BEGINSWITH %@", "Дата и время")).firstMatch
