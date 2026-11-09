@@ -26,7 +26,7 @@ final class WidgetSetupUITests: XCTestCase {
 
         let edit = home.buttons["Edit"]
         if edit.waitForExistence(timeout: 3) { edit.tap() }
-        let addWidget = home.buttons["Add Widget"]
+        let addWidget = home.buttons.matching(NSPredicate(format: "label ENDSWITH %@", "Add Widget")).firstMatch
         XCTAssertTrue(addWidget.waitForExistence(timeout: 5), home.debugDescription)
         addWidget.tap()
 
@@ -43,7 +43,7 @@ final class WidgetSetupUITests: XCTestCase {
         let result = home.cells["Moment"]
         XCTAssertTrue(result.waitForExistence(timeout: 10), home.debugDescription)
         result.tap()
-        let addSelected = home.buttons["Add Widget"]
+        let addSelected = home.buttons.matching(NSPredicate(format: "label ENDSWITH %@", "Add Widget")).firstMatch
         XCTAssertTrue(addSelected.waitForExistence(timeout: 5), home.debugDescription)
         addSelected.tap()
         let done = home.buttons["Done"]
