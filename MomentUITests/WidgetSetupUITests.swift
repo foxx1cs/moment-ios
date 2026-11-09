@@ -10,12 +10,15 @@ final class WidgetSetupUITests: XCTestCase {
         XCUIDevice.shared.press(.home)
         let home = XCUIApplication(bundleIdentifier: "com.apple.springboard")
 
-        let icon = home.icons["Moment"]
+        var visibleIcon: XCUIElement?
         for _ in 0..<4 {
-            if icon.exists && icon.isHittable { break }
+            visibleIcon = home.icons.matching(identifier: "Moment").allElementsBoundByIndex.first {
+                $0.frame.intersects(home.frame) && $0.isHittable
+            }
+            if visibleIcon != nil { break }
             home.swipeLeft()
         }
-        XCTAssertTrue(icon.waitForExistence(timeout: 10), home.debugDescription)
+        let icon = try XCTUnwrap(visibleIcon, home.debugDescription)
         icon.press(forDuration: 1.3)
         let editHome = home.buttons["Edit Home Screen"]
         XCTAssertTrue(editHome.waitForExistence(timeout: 5), home.debugDescription)
