@@ -36,6 +36,9 @@ run_xcode_tests() {
                -default-test-execution-time-allowance 120
                -maximum-test-execution-time-allowance 180)
     fi
+    if [[ -n "${MOMENT_TEST_ONLY:-}" ]]; then
+        extra+=("-only-testing:${MOMENT_TEST_ONLY}")
+    fi
     xcodebuild "$action" \
         -project "${project_dir}/Moment.xcodeproj" \
         -scheme Moment -configuration Debug \

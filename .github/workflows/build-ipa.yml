@@ -8,6 +8,10 @@ on:
         type: choice
         default: macos-15
         options: [macos-15, macos-15-intel]
+      widget_ui_only:
+        description: Run only the native widget setup check
+        type: boolean
+        default: false
   push:
     branches: [moment-ipa]
 
@@ -42,6 +46,8 @@ jobs:
           retention-days: 7
 
   test:
+    env:
+      MOMENT_TEST_ONLY: ${{ inputs.widget_ui_only && 'MomentUITests/WidgetSetupUITests' || '' }}
     runs-on: ${{ inputs.test_runner || 'macos-15' }}
     timeout-minutes: 30
     steps:
