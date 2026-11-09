@@ -32,7 +32,7 @@ for bundle in "$app" "$extension"; do
     plutil -lint "${bundle}/Info.plist"
     executable="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleExecutable' "${bundle}/Info.plist")"
     test -s "${bundle}/${executable}"
-    xcrun lipo -verify_arch arm64 "${bundle}/${executable}"
+    xcrun lipo "${bundle}/${executable}" -verify_arch arm64
 done
 
 mkdir "${work_dir}/Payload"
