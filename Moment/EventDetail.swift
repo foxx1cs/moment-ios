@@ -35,13 +35,6 @@ struct EventDetail: View {
                                     .frame(maxWidth: .infinity).padding(16)
                                     .background(Palette.surface, in: RoundedRectangle(cornerRadius: 16))
                             }
-                            if let link = shareLink(for: event) {
-                                ShareLink(item: link) {
-                                    Label("Поделиться ссылкой", systemImage: "link")
-                                        .frame(maxWidth: .infinity).padding(16)
-                                        .background(Palette.surface, in: RoundedRectangle(cornerRadius: 16))
-                                }
-                            }
                             Button { showShareCard = true } label: {
                                 Label("Создать карточку для публикации", systemImage: "photo")
                                     .frame(maxWidth: .infinity).padding(16)
@@ -153,16 +146,4 @@ struct EventDetail: View {
         return "\(String(localized: "Я жду:")) \(event.title)!\n\(String(localized: "Осталось:")) \(time)\n\(String(localized: "Дата:")) \(date)\(recurrence)"
     }
 
-    private func shareLink(for event: CountdownEvent) -> URL? {
-        var payload = URLComponents()
-        payload.queryItems = [URLQueryItem(name: "title", value: event.title),
-                              URLQueryItem(name: "date", value: String(Int(event.nextOccurrence(after: .now).timeIntervalSince1970))),
-                              URLQueryItem(name: "repeat", value: event.repeatsAnnually ? "1" : "0"),
-                              URLQueryItem(name: "month", value: event.repeatMonth.map(String.init)),
-                              URLQueryItem(name: "day", value: event.repeatDay.map(String.init)),
-                              URLQueryItem(name: "seconds", value: event.repeatSecondsOfDay.map(String.init))]
-        var page = URLComponents(string: "https://foxx1cs.github.io/moment-ios/")
-        page?.percentEncodedFragment = payload.percentEncodedQuery
-        return page?.url
-    }
 }

@@ -92,24 +92,6 @@ struct HomeView: View {
                     showGuide = true
                     return
                 }
-                if url.scheme == "moment", url.host == "import",
-                   let components = URLComponents(url: url, resolvingAgainstBaseURL: false) {
-                    let items = components.queryItems ?? []
-                    let title = items.first { $0.name == "title" }?.value ?? ""
-                    let raw = items.first { $0.name == "date" }?.value ?? ""
-                    if let timestamp = TimeInterval(raw), timestamp.isFinite,
-                       timestamp > 0, timestamp < 253402300800, !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        let repeats = items.first { $0.name == "repeat" }?.value == "1"
-                        let month = (items.first { $0.name == "month" }?.value).flatMap { Int($0) }
-                        let day = (items.first { $0.name == "day" }?.value).flatMap { Int($0) }
-                        let seconds = (items.first { $0.name == "seconds" }?.value).flatMap { Int($0) }
-                        importedCalendarEvent = CountdownEvent(title: String(title.prefix(60)), date: Date(timeIntervalSince1970: timestamp), repeatsAnnually: repeats,
-                            repeatMonth: month.flatMap { (1...12).contains($0) ? $0 : nil },
-                            repeatDay: day.flatMap { (1...31).contains($0) ? $0 : nil },
-                            repeatSecondsOfDay: seconds.flatMap { (0..<86400).contains($0) ? $0 : nil })
-                    }
-                    return
-                }
                 guard url.scheme == "moment", url.host == "event",
                       let id = UUID(uuidString: url.lastPathComponent) else { return }
                 selectedEvent = store.events.first { $0.id == id }

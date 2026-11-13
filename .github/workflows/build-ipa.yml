@@ -153,7 +153,7 @@ jobs:
           if gh release view "$tag" --repo foxx1cs/moment-ios >/dev/null 2>&1; then
             gh release edit "$tag" --repo foxx1cs/moment-ios --title "$title" --notes-file "$notes"
           else
-            gh release create "$tag" --repo foxx1cs/moment-ios --title "$title" --notes-file "$notes"
+            gh release create "$tag" --repo foxx1cs/moment-ios --target "$GITHUB_SHA" --title "$title" --notes-file "$notes"
           fi
           for name in "Moment-${version}.ipa" Moment-iOS.zip "VALIDATION-${version}.txt"; do
             asset_id=$(gh api "repos/foxx1cs/moment-ios/releases/tags/${tag}" --jq ".assets[] | select(.name == \"${name}\") | .id" || true)
