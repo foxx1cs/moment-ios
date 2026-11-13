@@ -4,6 +4,7 @@ import UIKit
 
 struct NotificationStatusView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.scenePhase) private var scenePhase
     @State private var status: UNAuthorizationStatus = .notDetermined
     @State private var pending = 0
 
@@ -23,12 +24,17 @@ struct NotificationStatusView: View {
             }
             .navigationTitle("Состояние уведомлений")
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Готово") { dismiss() } } }
-            .task {
-                let center = UNUserNotificationCenter.current()
-                status = await center.notificationSettings().authorizationStatus
-                pending = await center.pendingNotificationRequests().filter { $0.identifier.hasPrefix("moment.reminder.") }.count
+            .task { await refresh() }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active { Task { await refresh() } }
             }
         }
         .preferredColorScheme(.dark)
+    }
+
+    @MainActor private func refresh() async {
+        let center = UNUserNotificationCenter.current()
+        status = await center.notificationSettings().authorizationStatus
+        pending = await center.pendingNotificationRequests().filter { $0.identifier.hasPrefix("moment.reminder.") }.count
     }
 }
