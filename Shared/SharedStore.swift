@@ -6,15 +6,16 @@ struct EventArchive: Codable, Equatable {
 
     var pinnedEvent: CountdownEvent? {
         if let pinned = events.first(where: { $0.id == pinnedID }) { return pinned }
-        return events.sorted { $0.date < $1.date }.first(where: { $0.date > .now })
-            ?? events.sorted { $0.date > $1.date }.first
+        return events.sorted { $0.nextOccurrence(after: .now) < $1.nextOccurrence(after: .now) }
+            .first(where: { $0.nextOccurrence(after: .now) > .now })
+            ?? events.sorted { $0.nextOccurrence(after: .now) > $1.nextOccurrence(after: .now) }.first
     }
 }
 
 enum SharedStoreError: LocalizedError {
     case unavailableGroup
     var errorDescription: String? {
-        "Общее хранилище недоступно. Проверьте App Groups у приложения и виджета в Xcode."
+        String(localized: "Общее хранилище недоступно. Проверьте App Groups у приложения и виджета в Xcode.")
     }
 }
 

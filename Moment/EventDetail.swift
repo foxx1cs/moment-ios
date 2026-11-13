@@ -26,6 +26,11 @@ struct EventDetail: View {
                             }.padding(.horizontal, 4)
                         }
                         VStack(spacing: 12) {
+                            ShareLink(item: shareMessage(for: event)) {
+                                Label("Поделиться отсчётом", systemImage: "square.and.arrow.up")
+                                    .frame(maxWidth: .infinity).padding(16)
+                                    .background(Palette.surface, in: RoundedRectangle(cornerRadius: 16))
+                            }
                             Button {
                                 store.pin(event)
                             } label: {
@@ -78,5 +83,18 @@ struct EventDetail: View {
             } message: { Text(store.errorMessage ?? "") }
         }
         .preferredColorScheme(.dark)
+    }
+
+    private func shareMessage(for event: CountdownEvent) -> String {
+        let now = Date.now
+        let target = event.nextOccurrence(after: now)
+        let remaining = CountdownComponents(deadline: target, now: now)
+        let date = target.formatted(date: .long, time: .shortened)
+        if remaining.isFinished {
+            return "\(String(localized: "Момент уже наступил:")) \(event.title)\n\(String(localized: "Дата:")) \(date)"
+        }
+        let time = "\(remaining.days)\(String(localized: "д")) \(remaining.hours)\(String(localized: "ч")) \(remaining.minutes)\(String(localized: "м")) \(remaining.seconds)\(String(localized: "с"))"
+        let recurrence = event.repeatsAnnually ? "\n\(String(localized: "Повторяется каждый год"))" : ""
+        return "\(String(localized: "Я жду:")) \(event.title)!\n\(String(localized: "Осталось:")) \(time)\n\(String(localized: "Дата:")) \(date)\(recurrence)"
     }
 }

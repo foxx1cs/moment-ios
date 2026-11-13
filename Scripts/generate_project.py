@@ -89,6 +89,8 @@ def generate():
 
     assets = ref("Moment/Assets.xcassets", "folder.assetcatalog")
     privacy = ref("Moment/PrivacyInfo.xcprivacy", "text.xml")
+    localizations = ref("Localization/Localizable.xcstrings", "text.json")
+    file_groups["Localization"] = [localizations]
     file_groups["Moment"].extend([assets, privacy])
     base = ref("Config/Shared.xcconfig", "text.xcconfig")
     config_files = [base]
@@ -145,9 +147,14 @@ def generate():
         sources = phase(name + ":sources", "PBXSourcesBuildPhase",
                         [build(name + ":" + path, refs[path]) for path in paths])
         frameworks = phase(name + ":frameworks", "PBXFrameworksBuildPhase", [])
-        resources = phase(name + ":resources", "PBXResourcesBuildPhase",
-                          [build(name + ":assets", assets), build(name + ":privacy", privacy)]
-                          if name == "Moment" else [])
+        resource_files = (
+            [build(name + ":assets", assets), build(name + ":privacy", privacy),
+             build(name + ":localizations", localizations)]
+            if name == "Moment" else
+            [build(name + ":localizations", localizations)]
+            if name == "MomentWidgets" else []
+        )
+        resources = phase(name + ":resources", "PBXResourcesBuildPhase", resource_files)
         phases = [sources, frameworks, resources]
         dependencies = []
         if name == "Moment":
@@ -184,7 +191,7 @@ def generate():
             ident("target:MomentTests"): {"CreatedOnToolsVersion": "16.0", "TestTargetID": ident("target:Moment")},
             ident("target:MomentUITests"): {"CreatedOnToolsVersion": "16.0", "TestTargetID": ident("target:Moment")},
         }}, buildConfigurationList=project_configs, compatibilityVersion="Xcode 14.0",
-        developmentRegion="ru", hasScannedForEncodings=0, knownRegions=["ru", "Base"],
+        developmentRegion="ru", hasScannedForEncodings=0, knownRegions=["ru", "en", "Base"],
         mainGroup=root_group, productRefGroup=ident("group:Products"),
         projectDirPath="", projectRoot="", targets=targets)
 

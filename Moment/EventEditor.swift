@@ -10,21 +10,43 @@ struct EventEditor: View {
     @State private var symbol: String
     @State private var theme: EventTheme
     @State private var note: String
+    @State private var reminderOffsets: Set<Int>
+    @State private var repeatsAnnually: Bool
     @State private var saveError: String?
     private enum Field: Hashable { case title, note }
     @FocusState private var focusedField: Field?
+
+    private enum ReminderChoice: Int, CaseIterable, Identifiable {
+        case week = 604_800
+        case day = 86_400
+        case hour = 3_600
+        case moment = 0
+
+        var id: Int { rawValue }
+        var title: LocalizedStringKey {
+            switch self {
+            case .week: return "За неделю"
+            case .day: return "За день"
+            case .hour: return "За час"
+            case .moment: return "В момент события"
+            }
+        }
+    }
 
     private let symbols = ["sparkles", "airplane", "gift", "heart", "music.note", "gamecontroller", "graduationcap", "sun.max", "house", "flag.checkered", "party.popper", "moon.stars"]
 
     init(event: CountdownEvent? = nil) {
         original = event
-        let initial = event?.date ?? Calendar.current.date(byAdding: .day, value: 1, to: .now)!
+        let initial = event?.nextOccurrence(after: .now)
+            ?? Calendar.current.date(byAdding: .day, value: 1, to: .now)!
         _title = State(initialValue: event?.title ?? "")
         _date = State(initialValue: initial)
-        _seconds = State(initialValue: event.map { Calendar.current.component(.second, from: $0.date) } ?? 0)
+        _seconds = State(initialValue: Calendar.current.component(.second, from: initial))
         _symbol = State(initialValue: event?.symbol ?? "sparkles")
         _theme = State(initialValue: event?.theme ?? .aqua)
         _note = State(initialValue: event?.note ?? "")
+        _reminderOffsets = State(initialValue: Set(event?.reminderOffsets ?? []))
+        _repeatsAnnually = State(initialValue: event?.repeatsAnnually ?? false)
     }
 
     private var targetDate: Date {
@@ -104,6 +126,20 @@ struct EventEditor: View {
                         .lineLimit(3...5)
                         .onChange(of: note) { _, value in note = String(value.prefix(240)) }
                 }
+                Section("Повторение") {
+                    Toggle("Повторять каждый год", isOn: $repeatsAnnually)
+                    if repeatsAnnually {
+                        Text("Например, для дней рождения. Для 29 февраля в невисокосный год будет использоваться 28 февраля.")
+                            .font(.footnote).foregroundStyle(Palette.muted)
+                    }
+                }
+                Section {
+                    ForEach(ReminderChoice.allCases) { choice in
+                        Toggle(choice.title, isOn: reminderBinding(for: choice.rawValue))
+                    }
+                    Text("При первом сохранении напоминаний iOS запросит доступ к уведомлениям. Уже прошедшее время напоминания не отправляется.")
+                        .font(.footnote).foregroundStyle(Palette.muted)
+                } header: { Text("Напоминания") }
                 if targetDate <= .now {
                     Section { Text("Выберите дату и время в будущем.").foregroundStyle(.orange) }
                 }
@@ -136,7 +172,9 @@ struct EventEditor: View {
         guard !cleanTitle.isEmpty, targetDate > .now else { return }
         let event = CountdownEvent(id: original?.id ?? UUID(), title: cleanTitle, date: targetDate,
                                    createdAt: original?.createdAt ?? .now, symbol: symbol, theme: theme,
-                                   note: note.trimmingCharacters(in: .whitespacesAndNewlines))
+                                   note: note.trimmingCharacters(in: .whitespacesAndNewlines),
+                                   reminderOffsets: Array(reminderOffsets).sorted(by: >),
+                                   repeatsAnnually: repeatsAnnually)
         if store.save(event) { dismiss() }
         else {
             saveError = store.errorMessage
@@ -144,20 +182,30 @@ struct EventEditor: View {
         }
     }
 
+    private func reminderBinding(for offset: Int) -> Binding<Bool> {
+        Binding(
+            get: { reminderOffsets.contains(offset) },
+            set: { enabled in
+                if enabled { reminderOffsets.insert(offset) }
+                else { reminderOffsets.remove(offset) }
+            }
+        )
+    }
+
     private func symbolName(_ symbol: String) -> String {
         switch symbol {
-        case "sparkles": return "Мечта"
-        case "airplane": return "Путешествие"
-        case "gift": return "Подарок"
-        case "heart": return "Любовь"
-        case "music.note": return "Музыка"
-        case "gamecontroller": return "Игра"
-        case "graduationcap": return "Выпускной"
-        case "sun.max": return "Солнце"
-        case "house": return "Дом"
-        case "flag.checkered": return "Цель"
-        case "party.popper": return "Праздник"
-        default: return "Ночь"
+        case "sparkles": return String(localized: "Мечта")
+        case "airplane": return String(localized: "Путешествие")
+        case "gift": return String(localized: "Подарок")
+        case "heart": return String(localized: "Любовь")
+        case "music.note": return String(localized: "Музыка")
+        case "gamecontroller": return String(localized: "Игра")
+        case "graduationcap": return String(localized: "Выпускной")
+        case "sun.max": return String(localized: "Солнце")
+        case "house": return String(localized: "Дом")
+        case "flag.checkered": return String(localized: "Цель")
+        case "party.popper": return String(localized: "Праздник")
+        default: return String(localized: "Ночь")
         }
     }
 }

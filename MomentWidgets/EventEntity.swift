@@ -26,7 +26,8 @@ struct CountdownEventQuery: EntityQuery {
     func suggestedEntities() async throws -> [CountdownEventEntity] {
         let events = (try? SharedStore.live().read().events) ?? []
         return events
-            .sorted { $0.date < $1.date }.map(CountdownEventEntity.init)
+            .sorted { $0.nextOccurrence(after: .now) < $1.nextOccurrence(after: .now) }
+            .map(CountdownEventEntity.init)
     }
 }
 
@@ -36,7 +37,7 @@ enum WidgetSetupMode: String, AppEnum {
     static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Настройка виджета")
     static var caseDisplayRepresentations: [WidgetSetupMode: DisplayRepresentation] = [
         .manual: DisplayRepresentation(title: "Вручную", subtitle: "Название и дата прямо в виджете"),
-        .fromApp: DisplayRepresentation(title: "Из приложения", subtitle: "Нужен доступ к общему хранилищу")
+        .fromApp: DisplayRepresentation(title: "Из приложения", subtitle: "Нужен App Group в подписи приложения и виджета")
     ]
 }
 
@@ -47,7 +48,7 @@ struct CountdownConfiguration: WidgetConfigurationIntent {
     @Parameter(title: "Настройка", default: .manual)
     var mode: WidgetSetupMode
 
-    @Parameter(title: "Название", default: "Мой момент")
+    @Parameter(title: "Название", default: "Moment")
     var manualTitle: String
 
     @Parameter(title: "Дата и время", kind: .dateTime)

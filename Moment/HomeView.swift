@@ -1,4 +1,5 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct HomeView: View {
     @EnvironmentObject private var store: EventStore
@@ -7,6 +8,11 @@ struct HomeView: View {
     @State private var showGuide = false
     @State private var selectedEvent: CountdownEvent?
     @State private var showCompleted = false
+    @State private var showExporter = false
+    @State private var showImporter = false
+    @State private var backupDocument = EventBackupDocument(archive: EventArchive())
+    @State private var showBackupAlert = false
+    @State private var backupMessage = ""
 
     var body: some View {
         NavigationStack {
@@ -45,6 +51,15 @@ struct HomeView: View {
             .sheet(isPresented: $showEditor) { EventEditor() }
             .sheet(isPresented: $showGuide) { WidgetGuide() }
             .sheet(item: $selectedEvent) { EventDetail(eventID: $0.id) }
+            .fileExporter(isPresented: $showExporter, document: backupDocument,
+                          contentType: .json, defaultFilename: "Moment-Events") { result in
+                if case .failure(let error) = result {
+                    presentBackupMessage("\(String(localized: "Не удалось экспортировать резервную копию.")) \(error.localizedDescription)")
+                }
+            }
+            .fileImporter(isPresented: $showImporter, allowedContentTypes: [.json]) { result in
+                importBackup(result)
+            }
             .alert(store.isLoaded ? "Не удалось сохранить данные" : "Не удалось открыть данные", isPresented: Binding(
                 get: { store.errorMessage != nil },
                 set: { if !$0 { store.errorMessage = nil } }
@@ -87,6 +102,52 @@ struct HomeView: View {
             .accessibilityLabel("Создать событие")
             .accessibilityIdentifier("addEventButton")
             .disabled(!store.isLoaded)
+            Menu {
+                Button("Экспортировать события", systemImage: "square.and.arrow.up") {
+                    backupDocument = EventBackupDocument(archive: store.archive)
+                    showExporter = true
+                }
+                Button("Импортировать резервную копию", systemImage: "square.and.arrow.down") {
+                    showImporter = true
+                }
+            } label: {
+                Image(systemName: "ellipsis")
+                    .font(.system(size: 19, weight: .medium))
+                    .foregroundStyle(Palette.muted)
+                    .frame(width: 38, height: 48)
+                    .contentShape(Rectangle())
+            }
+            .accessibilityLabel("Резервная копия")
+            .disabled(!store.isLoaded)
+        }
+        .alert("Резервная копия", isPresented: $showBackupAlert) {
+            Button("Понятно", role: .cancel) {}
+        } message: { Text(backupMessage) }
+    }
+
+    private func presentBackupMessage(_ message: String) {
+        backupMessage = message
+        showBackupAlert = true
+    }
+
+    private func importBackup(_ result: Result<URL, Error>) {
+        do {
+            let url = try result.get()
+            let accessing = url.startAccessingSecurityScopedResource()
+            defer { if accessing { url.stopAccessingSecurityScopedResource() } }
+            let imported = try EventBackupDocument.decode(Data(contentsOf: url))
+            guard let count = store.mergeImported(imported) else {
+                let message = store.errorMessage ?? String(localized: "Не удалось импортировать резервную копию.")
+                store.errorMessage = nil
+                presentBackupMessage(message)
+                return
+            }
+            let message = count == 0
+                ? String(localized: "Новых событий не найдено. Текущие события сохранены.")
+                : "\(String(localized: "Добавлено событий:")) \(count)."
+            presentBackupMessage(message)
+        } catch {
+            presentBackupMessage("\(String(localized: "Не удалось импортировать резервную копию.")) \(error.localizedDescription)")
         }
     }
 
@@ -118,8 +179,16 @@ struct HomeView: View {
     }
 
     private func eventsSection(now: Date) -> some View {
-        let events = store.events.filter { showCompleted ? $0.date <= now : $0.date > now }
-            .sorted { showCompleted ? $0.date > $1.date : $0.date < $1.date }
+        let events = store.events.filter {
+            showCompleted
+                ? (!$0.repeatsAnnually && $0.nextOccurrence(after: now) <= now)
+                : $0.nextOccurrence(after: now) > now
+        }
+        .sorted {
+            showCompleted
+                ? $0.nextOccurrence(after: now) > $1.nextOccurrence(after: now)
+                : $0.nextOccurrence(after: now) < $1.nextOccurrence(after: now)
+        }
         return VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Text("Мои события").font(.system(size: 20, weight: .semibold))
@@ -184,29 +253,42 @@ private struct EventRow: View {
     let pinned: Bool
 
     var body: some View {
-        HStack(spacing: 14) {
-            Image(systemName: event.symbol)
-                .font(.system(size: 21))
-                .foregroundStyle(event.theme.color)
-                .frame(width: 48, height: 52)
-                .background(event.theme.color.opacity(0.10), in: RoundedRectangle(cornerRadius: 16))
-            VStack(alignment: .leading, spacing: 6) {
-                HStack(spacing: 6) {
-                    Text(event.title).font(.system(size: 15, weight: .medium)).lineLimit(1)
-                    if pinned { Image(systemName: "pin.fill").font(.system(size: 9)).foregroundStyle(Palette.aqua) }
+        VStack(spacing: 8) {
+            HStack(spacing: 14) {
+                Image(systemName: event.symbol)
+                    .font(.system(size: 21))
+                    .foregroundStyle(event.theme.color)
+                    .frame(width: 48, height: 52)
+                    .background(event.theme.color.opacity(0.10), in: RoundedRectangle(cornerRadius: 16))
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(spacing: 6) {
+                        Text(event.title).font(.system(size: 15, weight: .medium)).lineLimit(1)
+                        if pinned { Image(systemName: "pin.fill").font(.system(size: 9)).foregroundStyle(Palette.aqua) }
+                    }
+                    Text(event.nextOccurrence(after: now).formatted(date: .abbreviated, time: .shortened))
+                        .font(.system(size: 11)).foregroundStyle(Palette.muted)
                 }
-                Text(event.date.formatted(date: .abbreviated, time: .shortened))
-                    .font(.system(size: 11)).foregroundStyle(Palette.muted)
-            }
-            Spacer(minLength: 4)
-            VStack(alignment: .trailing, spacing: 4) {
-                let time = event.remaining(at: now)
-                Text(time.isFinished ? "✓" : String(format: "%02d:%02d:%02d", time.hours, time.minutes, time.seconds))
-                    .font(.system(size: 16, weight: .medium, design: .rounded))
-                    .monospacedDigit().foregroundStyle(event.theme.color)
-                Text(time.isFinished ? "Настал" : "Дней: \(time.days)")
+                Spacer(minLength: 4)
+                VStack(alignment: .trailing, spacing: 4) {
+                    let time = CountdownComponents(deadline: event.nextOccurrence(after: now), now: now)
+                    Text(time.isFinished ? "✓" : String(format: "%02d:%02d:%02d", time.hours, time.minutes, time.seconds))
+                        .font(.system(size: 16, weight: .medium, design: .rounded))
+                        .monospacedDigit().foregroundStyle(event.theme.color)
+                    Group {
+                        if time.isFinished {
+                            Text("Настал")
+                        } else {
+                            Text("Дней: \(time.days)")
+                        }
+                    }
                     .font(.system(size: 10)).foregroundStyle(Palette.muted)
+                }
             }
+            ProgressView(value: event.progress(at: now))
+                .tint(event.theme.color)
+                .padding(.leading, 62)
+                .scaleEffect(y: 0.7)
+                .accessibilityLabel("Прогресс до события")
         }
         .padding(15)
         .background(Palette.surface, in: RoundedRectangle(cornerRadius: 22))

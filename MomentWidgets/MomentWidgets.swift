@@ -31,7 +31,11 @@ struct CountdownWidgetView: View {
             } else {
                 VStack(alignment: .leading, spacing: 5) {
                     Label("Moment", systemImage: "sparkles").font(.headline)
-                    Text(entry.unavailable ? "Выберите «Вручную»" : entry.deleted ? "Событие удалено" : entry.manual ? "Укажите дату и время" : "Создайте событие")
+                    Text(entry.unavailable
+                         ? "События приложения требуют App Groups. Выберите «Вручную» и задайте название и дату в настройках виджета."
+                         : entry.deleted ? "Событие удалено"
+                         : entry.manual ? "Укажите дату и время"
+                         : "Создайте событие")
                         .font(.caption)
                     if !entry.deleted && family != .accessoryRectangular {
                         Text("Зажмите → Изменить виджет").font(.caption2)
@@ -49,7 +53,7 @@ struct CountdownWidgetView: View {
         VStack(alignment: .leading, spacing: 2) {
             Label(event.title, systemImage: event.symbol)
                 .font(.system(size: 12, weight: .semibold)).lineLimit(1)
-            timer(event, size: 26)
+            timer(event, targetDate: entry.targetDate ?? event.date, size: 26)
             Text("ЧАСЫ : МИН : СЕК")
                 .font(.system(size: 8, weight: .medium)).opacity(0.7)
         }
@@ -70,14 +74,15 @@ struct CountdownWidgetView: View {
             Text(event.title).font(.system(size: 14, weight: .semibold))
                 .lineLimit(1)
             VStack(alignment: .leading, spacing: 4) {
-                timer(event, size: family == .systemSmall ? 30 : 38)
+                timer(event, targetDate: entry.targetDate ?? event.date,
+                      size: family == .systemSmall ? 30 : 38)
                     .foregroundStyle(event.theme.color)
                 Text("ЧАСЫ : МИНУТЫ : СЕКУНДЫ")
                     .font(.system(size: family == .systemSmall ? 7 : 8, weight: .medium))
                     .tracking(0.5).foregroundStyle(.gray)
             }
             if family == .systemMedium {
-                Text(event.date.formatted(date: .abbreviated, time: .shortened))
+                Text((entry.targetDate ?? event.date).formatted(date: .abbreviated, time: .shortened))
                     .font(.system(size: 10)).foregroundStyle(.gray)
             }
         }
@@ -85,9 +90,9 @@ struct CountdownWidgetView: View {
     }
 
     @ViewBuilder
-    private func timer(_ event: CountdownEvent, size: CGFloat) -> some View {
-        if event.date > entry.date {
-            Text(timerInterval: entry.date...event.date, countsDown: true, showsHours: true)
+    private func timer(_ event: CountdownEvent, targetDate: Date, size: CGFloat) -> some View {
+        if targetDate > entry.date {
+            Text(timerInterval: entry.date...targetDate, countsDown: true, showsHours: true)
                 .font(.system(size: size, weight: .light, design: .rounded))
                 .monospacedDigit().lineLimit(1).minimumScaleFactor(0.35)
                 .multilineTextAlignment(.leading)

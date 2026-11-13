@@ -1,0 +1,1546 @@
+{
+  "sourceLanguage": "ru",
+  "strings": {
+    "Добавьте Moment": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Moment"
+          }
+        }
+      }
+    },
+    "Большое путешествие": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The big trip"
+          }
+        }
+      }
+    },
+    "Выберите «Вручную»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose Manual"
+          }
+        }
+      }
+    },
+    "Зажмите → Изменить виджет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touch and hold → Edit Widget"
+          }
+        }
+      }
+    },
+    "Выберите другое в настройках виджета": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose another event in widget settings"
+          }
+        }
+      }
+    },
+    "Укажите дату и время": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add a date and time"
+          }
+        }
+      }
+    },
+    "Событие удалено": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Event deleted"
+          }
+        }
+      }
+    },
+    "Создайте событие": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create an event"
+          }
+        }
+      }
+    },
+    "Настройте виджет вручную": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set up the widget manually"
+          }
+        }
+      }
+    },
+    "Виджет не может прочитать события приложения в этой установке. Выберите «Вручную» и укажите название, дату и время прямо в настройках виджета.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This installation can't access events saved in the app. Choose Manual and enter an event name, date, and time in the widget settings."
+          }
+        }
+      }
+    },
+    "Ближе с каждой\nсекундой.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One second\ncloser."
+          }
+        }
+      }
+    },
+    "ЧАСЫ : МИНУТЫ : СЕКУНДЫ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HOURS : MINUTES : SECONDS"
+          }
+        }
+      }
+    },
+    "ПРИМЕР ВИДЖЕТА": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WIDGET PREVIEW"
+          }
+        }
+      }
+    },
+    "Ручная настройка хранится отдельно для каждого виджета. Изменение события в приложении не меняет ручной отсчёт.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manual settings are saved separately for each widget. Changes to an event in the app won't change a manually configured countdown."
+          }
+        }
+      }
+    },
+    "Как работают секунды": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How the seconds work"
+          }
+        }
+      }
+    },
+    "Системный таймер показывает общее число часов, минуты и секунды. Например, 9 дней — это 216 часов. В приложении дни выделены отдельно.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The system timer shows total hours, minutes, and seconds. For example, 9 days is 216 hours. The app shows days separately."
+          }
+        }
+      }
+    },
+    "iOS сама обновляет таймер. В Always-On, энергосбережении и при сниженной частоте обновления секунды могут быть скрыты или обновляться реже. Приложение не может принудительно изменить это поведение.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS controls widget updates. On Always-On displays, in Low Power Mode, or when iOS reduces refresh rates, seconds may be hidden or update less often."
+          }
+        }
+      }
+    },
+    "После окончания отсчёт останавливается на нуле. Обновление подписи и смена события в виджете могут происходить с задержкой iOS.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The countdown stops at zero. iOS may take a moment to update the event title or show changes to the selected event."
+          }
+        }
+      }
+    },
+    "Готово": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        }
+      }
+    },
+    "Дни": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Days"
+          }
+        }
+      }
+    },
+    "Часы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hours"
+          }
+        }
+      }
+    },
+    "Минуты": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minutes"
+          }
+        }
+      }
+    },
+    "Секунды": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seconds"
+          }
+        }
+      }
+    },
+    "ДНИ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DAYS"
+          }
+        }
+      }
+    },
+    "ЧАСЫ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HOURS"
+          }
+        }
+      }
+    },
+    "МИН": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MIN"
+          }
+        }
+      }
+    },
+    "СЕК": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SEC"
+          }
+        }
+      }
+    },
+    "В ПРЕДВКУШЕНИИ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "COUNTING DOWN"
+          }
+        }
+      }
+    },
+    "МОМЕНТ НАСТАЛ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IT'S HERE"
+          }
+        }
+      }
+    },
+    "Каждая секунда приближает": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every second brings it closer"
+          }
+        }
+      }
+    },
+    "Время создавать новые воспоминания": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time to make new memories"
+          }
+        }
+      }
+    },
+    "Осталось: %lld дней, %lld часов, %lld минут, %lld секунд": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld days, %2$lld hours, %3$lld minutes, %4$lld seconds remaining"
+          }
+        }
+      }
+    },
+    "У хорошего впереди есть точное время.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Good things have a time and date."
+          }
+        }
+      }
+    },
+    "Не удалось сохранить данные": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't save your data"
+          }
+        }
+      }
+    },
+    "Не удалось открыть данные": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't load your data"
+          }
+        }
+      }
+    },
+    "Повторить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try Again"
+          }
+        }
+      }
+    },
+    "Понятно": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "Открыть событие": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open event"
+          }
+        }
+      }
+    },
+    "Ждать — красиво.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make the wait look good."
+          }
+        }
+      }
+    },
+    "Создать событие": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create an event"
+          }
+        }
+      }
+    },
+    "ВАШ ПЕРВЫЙ МОМЕНТ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YOUR FIRST MOMENT"
+          }
+        }
+      }
+    },
+    "Впереди —\nчто-то хорошее.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something good\nis coming."
+          }
+        }
+      }
+    },
+    "Путешествие, встреча или большая мечта.\nНачните отсчёт до важного.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A trip, a reunion, or a big dream.\nStart counting down to what matters."
+          }
+        }
+      }
+    },
+    "Мои события": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My Events"
+          }
+        }
+      }
+    },
+    "События": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Events"
+          }
+        }
+      }
+    },
+    "Впереди": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upcoming"
+          }
+        }
+      }
+    },
+    "Завершённые": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Past"
+          }
+        }
+      }
+    },
+    "Здесь будут ваши прошедшие моменты.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Past moments will show up here."
+          }
+        }
+      }
+    },
+    "Добавьте то, чего ждёте с нетерпением.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add something you're looking forward to."
+          }
+        }
+      }
+    },
+    "Главное событие": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Featured event"
+          }
+        }
+      }
+    },
+    "Открыть": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open"
+          }
+        }
+      }
+    },
+    "Всегда перед глазами": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Always in sight"
+          }
+        }
+      }
+    },
+    "Виджет с ручной настройкой": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget with manual setup"
+          }
+        }
+      }
+    },
+    "Отсчёт на экране блокировки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Countdown on your Lock Screen"
+          }
+        }
+      }
+    },
+    "Название и дата задаются в виджете": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set the name and date in the widget"
+          }
+        }
+      }
+    },
+    "Название события": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Event name"
+          }
+        }
+      }
+    },
+    "Чего ждём?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What are you waiting for?"
+          }
+        }
+      }
+    },
+    "Дата и время": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date and time"
+          }
+        }
+      }
+    },
+    "Тот самый момент": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Moment"
+          }
+        }
+      }
+    },
+    "Настроение": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Style"
+          }
+        }
+      }
+    },
+    "Пара слов для себя": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A note to yourself"
+          }
+        }
+      }
+    },
+    "Почему этот день особенный?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Why is this day special?"
+          }
+        }
+      }
+    },
+    "Выберите дату и время в будущем.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a date and time in the future."
+          }
+        }
+      }
+    },
+    "Новый момент": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New Moment"
+          }
+        }
+      }
+    },
+    "Изменить момент": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit Moment"
+          }
+        }
+      }
+    },
+    "Отмена": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        }
+      }
+    },
+    "Сохранить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
+          }
+        }
+      }
+    },
+    "Для меня": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FOR ME"
+          }
+        }
+      }
+    },
+    "Сделать главным": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set as featured"
+          }
+        }
+      }
+    },
+    "Главное событие отображается на первом экране и в виджете без выбранного события.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your featured event appears on the Home Screen and in widgets without a selected event."
+          }
+        }
+      }
+    },
+    "Добавить виджет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add a Widget"
+          }
+        }
+      }
+    },
+    "Удалить событие": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete Event"
+          }
+        }
+      }
+    },
+    "Ваш момент": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Moment"
+          }
+        }
+      }
+    },
+    "Закрыть": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        }
+      }
+    },
+    "Изменить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit"
+          }
+        }
+      }
+    },
+    "Удалить событие? Оно исчезнет и из виджета.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this event? It will also be removed from the widget."
+          }
+        }
+      }
+    },
+    "Не удалось сохранить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't save"
+          }
+        }
+      }
+    },
+    "Мечта": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dream"
+          }
+        }
+      }
+    },
+    "Путешествие": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Travel"
+          }
+        }
+      }
+    },
+    "Подарок": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gift"
+          }
+        }
+      }
+    },
+    "Любовь": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Love"
+          }
+        }
+      }
+    },
+    "Музыка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Music"
+          }
+        }
+      }
+    },
+    "Игра": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Game"
+          }
+        }
+      }
+    },
+    "Выпускной": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Graduation"
+          }
+        }
+      }
+    },
+    "Солнце": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunshine"
+          }
+        }
+      }
+    },
+    "Дом": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Home"
+          }
+        }
+      }
+    },
+    "Цель": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goal"
+          }
+        }
+      }
+    },
+    "Праздник": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Celebration"
+          }
+        }
+      }
+    },
+    "Ночь": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Night"
+          }
+        }
+      }
+    },
+    "Мята": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mint"
+          }
+        }
+      }
+    },
+    "Лаванда": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lavender"
+          }
+        }
+      }
+    },
+    "Персик": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peach"
+          }
+        }
+      }
+    },
+    "Небо": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sky"
+          }
+        }
+      }
+    },
+    "Роза": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rose"
+          }
+        }
+      }
+    },
+    "Настройка виджета": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget Setup"
+          }
+        }
+      }
+    },
+    "Вручную": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manual"
+          }
+        }
+      }
+    },
+    "Название и дата прямо в виджете": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set the name and date in the widget"
+          }
+        }
+      }
+    },
+    "Из приложения": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From the App"
+          }
+        }
+      }
+    },
+    "Нужен доступ к общему хранилищу": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requires shared storage access"
+          }
+        }
+      }
+    },
+    "Событие": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Event"
+          }
+        }
+      }
+    },
+    "Настройка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Setup"
+          }
+        }
+      }
+    },
+    "Название": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name"
+          }
+        }
+      }
+    },
+    "Событие из приложения": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App Event"
+          }
+        }
+      }
+    },
+    "Вручную: задайте название, дату и секунды. Из приложения: выберите сохранённое событие при доступной синхронизации.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manual: enter a name, date, and seconds. From the App: choose a saved event when sync is available."
+          }
+        }
+      }
+    },
+    "ЧАСЫ : МИН : СЕК": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HOURS : MIN : SEC"
+          }
+        }
+      }
+    },
+    "Сначала восстановите доступ к хранилищу и перезапустите приложение. Существующие данные не будут перезаписаны.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore access to storage, then restart Moment. Existing data won't be overwritten."
+          }
+        }
+      }
+    },
+    "Общее хранилище недоступно. Проверьте App Groups у приложения и виджета в Xcode.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shared storage isn't available. Check the app and widget's App Groups capability in Xcode."
+          }
+        }
+      }
+    },
+    "Мой момент": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My Moment"
+          }
+        }
+      }
+    },
+    "Часовой пояс: %@. Дата сохраняется как точный момент времени; смена часового пояса не сбрасывает отсчёт.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time zone: %@. The event is saved as a precise moment, so changing time zones won't reset the countdown."
+          }
+        }
+      }
+    },
+    "DЛЯ МЕНЯ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FOR ME"
+          }
+        }
+      }
+    },
+    "Удалить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        }
+      }
+    },
+    "Настал": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Here"
+          }
+        }
+      }
+    },
+    "Дней: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld days"
+          }
+        }
+      }
+    },
+    "На главном экране зажмите пустую область → «Изменить» или «+» → «Добавить виджет» → Moment. На экране блокировки добавьте его в область под часами.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On the Home Screen, touch and hold an empty area. Tap Edit or +, then Add Widget → Moment. To add it on your Lock Screen, tap the area below the clock."
+          }
+        }
+      }
+    },
+    "Откройте настройки виджета": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open widget settings"
+          }
+        }
+      }
+    },
+    "На главном экране зажмите виджет → «Изменить виджет». На экране блокировки нажмите на него в режиме настройки.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On the Home Screen, touch and hold the widget, then tap Edit Widget. On the Lock Screen, tap the widget while customising your Lock Screen."
+          }
+        }
+      }
+    },
+    "Укажите название, дату и время. Поле «Секунды» позволяет задать точный момент. Этот режим не требует доступа к событиям приложения.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter a title, date, and time. Use Seconds to set the exact moment. Manual setup works without access to events saved in the app."
+          }
+        }
+      }
+    },
+    "Или выберите «Из приложения»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Or choose From the App"
+          }
+        }
+      }
+    },
+    "Выберите сохранённое событие. Его изменения будут передаваться виджету автоматически.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a saved event. Changes to that event will sync to the widget automatically."
+          }
+        }
+      }
+    },
+    "Отсчёт до секунды. Название и дату можно задать прямо в настройках виджета, без синхронизации с приложением.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A second-accurate countdown. Set the event name and date right in the widget, no app sync required."
+          }
+        }
+      }
+    },
+    "Момент настал": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moment is here"
+          }
+        }
+      }
+    },
+    "ДЛЯ МЕНЯ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FOR ME"
+          }
+        }
+      }
+    },
+    "Нужен App Group в подписи приложения и виджета": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requires the App Group capability in both the app and widget provisioning profiles"
+          }
+        }
+      }
+    },
+    "События приложения требуют App Groups. Выберите «Вручную» и задайте название и дату в настройках виджета.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App events need App Groups. Choose Manual and enter an event name and date in widget settings."
+          }
+        }
+      }
+    },
+    "Для выбора события из приложения нужны App Groups в подписи приложения и виджета. Выберите «Вручную», чтобы указать название, дату, время и секунды прямо в настройках виджета.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To use events saved in the app, App Groups must be enabled for both the app and widget. Choose Manual to enter a title, date, time, and seconds right in widget settings."
+          }
+        }
+      }
+    },
+    "За неделю": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A week before"
+          }
+        }
+      }
+    },
+    "За день": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A day before"
+          }
+        }
+      }
+    },
+    "За час": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An hour before"
+          }
+        }
+      }
+    },
+    "В момент события": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When it happens"
+          }
+        }
+      }
+    },
+    "Напоминания": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reminders"
+          }
+        }
+      }
+    },
+    "При первом сохранении напоминаний iOS запросит доступ к уведомлениям. Уже прошедшее время напоминания не отправляется.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS will ask to send notifications the first time you save a reminder. Reminder times that have already passed are skipped."
+          }
+        }
+      }
+    },
+    "Настал момент, которого вы ждали.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moment you've been waiting for is here."
+          }
+        }
+      }
+    },
+    "Скоро наступит ваш момент.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your moment is coming up."
+          }
+        }
+      }
+    },
+    "Повторять каждый год": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repeat every year"
+          }
+        }
+      }
+    },
+    "Повторение": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repeat"
+          }
+        }
+      }
+    },
+    "Например, для дней рождения. Для 29 февраля в невисокосный год будет использоваться 28 февраля.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For birthdays, for example. February 29 falls on February 28 in non-leap years."
+          }
+        }
+      }
+    },
+    "Повторяется каждый год": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repeats every year"
+          }
+        }
+      }
+    },
+    "Поделиться отсчётом": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share countdown"
+          }
+        }
+      }
+    },
+    "Момент уже наступил:": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The moment has arrived:"
+          }
+        }
+      }
+    },
+    "Я жду:": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I'm counting down to:"
+          }
+        }
+      }
+    },
+    "Осталось:": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time remaining:"
+          }
+        }
+      }
+    },
+    "Дата:": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date:"
+          }
+        }
+      }
+    },
+    "д": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "d"
+          }
+        }
+      }
+    },
+    "ч": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "h"
+          }
+        }
+      }
+    },
+    "м": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "m"
+          }
+        }
+      }
+    },
+    "с": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "s"
+          }
+        }
+      }
+    },
+    "Резервная копия": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Backup"
+          }
+        }
+      }
+    },
+    "Экспортировать события": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export events"
+          }
+        }
+      }
+    },
+    "Импортировать резервную копию": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import a backup"
+          }
+        }
+      }
+    },
+    "Не удалось экспортировать резервную копию.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't export the backup."
+          }
+        }
+      }
+    },
+    "Не удалось импортировать резервную копию.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't import the backup."
+          }
+        }
+      }
+    },
+    "Новых событий не найдено. Текущие события сохранены.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No new events found. Your current events were kept."
+          }
+        }
+      }
+    },
+    "Добавлено событий:": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Events added:"
+          }
+        }
+      }
+    },
+    "Прогресс до события": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progress to event"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.1"
+}

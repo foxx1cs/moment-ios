@@ -15,10 +15,10 @@ struct CountdownDisplay: View {
             unit(components.seconds, label: "СЕК")
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Осталось: \(components.days) дней, \(components.hours) часов, \(components.minutes) минут, \(components.seconds) секунд")
+        .accessibilityLabel(Text("Осталось: \(components.days) дней, \(components.hours) часов, \(components.minutes) минут, \(components.seconds) секунд"))
     }
 
-    private func unit(_ value: Int, label: String) -> some View {
+    private func unit(_ value: Int, label: LocalizedStringKey) -> some View {
         VStack(spacing: 8) {
             Text(String(format: "%02d", value))
                 .font(.system(size: compact ? 28 : 44, weight: .light, design: .rounded))
@@ -46,6 +46,8 @@ struct EventHero: View {
     let event: CountdownEvent
     let now: Date
 
+    private var targetDate: Date { event.nextOccurrence(after: now) }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             HStack {
@@ -54,7 +56,7 @@ struct EventHero: View {
                     .frame(width: 52, height: 52)
                     .background(.white.opacity(0.28), in: RoundedRectangle(cornerRadius: 18))
                 Spacer()
-                Label(event.date > now ? "В ПРЕДВКУШЕНИИ" : "МОМЕНТ НАСТАЛ", systemImage: "circle.fill")
+                Label(targetDate > now ? "В ПРЕДВКУШЕНИИ" : "МОМЕНТ НАСТАЛ", systemImage: "circle.fill")
                     .font(.system(size: 9, weight: .bold))
                     .tracking(1)
                     .labelStyle(StatusLabelStyle())
@@ -64,9 +66,14 @@ struct EventHero: View {
                     .font(.system(size: 29, weight: .semibold, design: .rounded))
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
-                Text(event.date.formatted(.dateTime.day().month(.wide).year().hour().minute().second()))
+                Text(targetDate.formatted(.dateTime.day().month(.wide).year().hour().minute().second()))
                     .font(.subheadline)
                     .opacity(0.65)
+                if event.repeatsAnnually {
+                    Label("Повторяется каждый год", systemImage: "repeat")
+                        .font(.system(size: 10, weight: .medium))
+                        .opacity(0.7)
+                }
             }
             CountdownDisplay(components: event.remaining(at: now))
             GeometryReader { geometry in
@@ -77,7 +84,7 @@ struct EventHero: View {
             .frame(height: 3)
             .accessibilityHidden(true)
             HStack {
-                Text(event.date > now ? "Каждая секунда приближает" : "Время создавать новые воспоминания")
+                Text(targetDate > now ? "Каждая секунда приближает" : "Время создавать новые воспоминания")
                     .font(.system(size: 11))
                 Spacer(minLength: 4)
                 Image(systemName: "arrow.up.right")

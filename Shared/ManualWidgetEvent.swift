@@ -8,7 +8,7 @@ enum ManualWidgetEvent {
         let name = String(title.trimmingCharacters(in: .whitespacesAndNewlines).prefix(60))
         return CountdownEvent(
             id: UUID(uuidString: "1F849A89-2C70-40D2-97D0-9DAF4B11FEF2")!,
-            title: name.isEmpty ? "Мой момент" : name,
+            title: name.isEmpty ? String(localized: "Мой момент") : name,
             date: minute.addingTimeInterval(TimeInterval(seconds)), createdAt: now,
             symbol: "hourglass", theme: .aqua
         )

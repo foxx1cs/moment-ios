@@ -5,6 +5,12 @@
     "sourceTree": "<group>",
     "lastKnownFileType": "sourcecode.swift"
   },
+  "54DBE9C74D58C24C91F3D046": {
+    "isa": "PBXFileReference",
+    "path": "Moment/EventBackup.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
   "5FC027410D7D3AFE751AC12F": {
     "isa": "PBXFileReference",
     "path": "Moment/EventDetail.swift",
@@ -32,6 +38,12 @@
   "36F5F674DB6739F108BC3034": {
     "isa": "PBXFileReference",
     "path": "Moment/MomentApp.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "B28215922115674A3075B348": {
+    "isa": "PBXFileReference",
+    "path": "Moment/ReminderScheduler.swift",
     "sourceTree": "<group>",
     "lastKnownFileType": "sourcecode.swift"
   },
@@ -125,6 +137,12 @@
     "sourceTree": "<group>",
     "lastKnownFileType": "text.xml"
   },
+  "F9A138342A0D85067878C934": {
+    "isa": "PBXFileReference",
+    "path": "Localization/Localizable.xcstrings",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "text.json"
+  },
   "2C94172D67DA116C7BB32C13": {
     "isa": "PBXFileReference",
     "path": "Config/Shared.xcconfig",
@@ -181,11 +199,13 @@
     "isa": "PBXGroup",
     "children": [
       "19193EF35C46C9D9A9535C4D",
+      "54DBE9C74D58C24C91F3D046",
       "5FC027410D7D3AFE751AC12F",
       "B6B3A97C4EC3860F90777F12",
       "B91217B195045BD41E6DD86F",
       "F84D305F991EFDF8153AC7F9",
       "36F5F674DB6739F108BC3034",
+      "B28215922115674A3075B348",
       "26B074AA5E0474BB510E10CC",
       "B4E5998C67ADF64E0E9F2043",
       "F8769A72388866CAE997FF92"
@@ -233,6 +253,14 @@
     "sourceTree": "<group>",
     "name": "MomentUITests"
   },
+  "82453F221610FFC816A4E1DF": {
+    "isa": "PBXGroup",
+    "children": [
+      "F9A138342A0D85067878C934"
+    ],
+    "sourceTree": "<group>",
+    "name": "Localization"
+  },
   "5619E268CFFE28118C19FC6A": {
     "isa": "PBXGroup",
     "children": [
@@ -269,6 +297,7 @@
       "270318E5C8FE346CC9E1CF70",
       "6FC809F6DFDAA89769AD1CF1",
       "42CDA48D68C32DD8CEB12B79",
+      "82453F221610FFC816A4E1DF",
       "5619E268CFFE28118C19FC6A",
       "5151B46607EBC8890D8DFCC2",
       "AA4ACA445B3FBAF47CDE31AC"
@@ -279,6 +308,10 @@
   "A60602A2FE065EC68FA677D8": {
     "isa": "PBXBuildFile",
     "fileRef": "19193EF35C46C9D9A9535C4D"
+  },
+  "A0A0F7AF6C24F165062FCBB1": {
+    "isa": "PBXBuildFile",
+    "fileRef": "54DBE9C74D58C24C91F3D046"
   },
   "78F90F440508A43D416E8B33": {
     "isa": "PBXBuildFile",
@@ -299,6 +332,10 @@
   "482EFD5EE963C2042876D80A": {
     "isa": "PBXBuildFile",
     "fileRef": "36F5F674DB6739F108BC3034"
+  },
+  "93164A455EFB3BFCA8E38923": {
+    "isa": "PBXBuildFile",
+    "fileRef": "B28215922115674A3075B348"
   },
   "BF201513042AAEEEB4628CD7": {
     "isa": "PBXBuildFile",
@@ -325,11 +362,13 @@
     "buildActionMask": 2147483647,
     "files": [
       "A60602A2FE065EC68FA677D8",
+      "A0A0F7AF6C24F165062FCBB1",
       "78F90F440508A43D416E8B33",
       "9CC49C95D783BAA29715C288",
       "E66D6F2FE0C1E1242532069C",
       "F23F5A57CEAA1DEDB2E22E6D",
       "482EFD5EE963C2042876D80A",
+      "93164A455EFB3BFCA8E38923",
       "BF201513042AAEEEB4628CD7",
       "8B38E40FE91C38E2BFBC7518",
       "B0001EB78709ABA430F785B6",
@@ -352,12 +391,17 @@
     "isa": "PBXBuildFile",
     "fileRef": "F8769A72388866CAE997FF92"
   },
+  "96C03CA618DDF52180C668A1": {
+    "isa": "PBXBuildFile",
+    "fileRef": "F9A138342A0D85067878C934"
+  },
   "196B11345E7306858216DCAD": {
     "isa": "PBXResourcesBuildPhase",
     "buildActionMask": 2147483647,
     "files": [
       "812D29B88506A296EB6A6063",
-      "59BE9C7E3A5319931E77E56F"
+      "59BE9C7E3A5319931E77E56F",
+      "96C03CA618DDF52180C668A1"
     ],
     "runOnlyForDeploymentPostprocessing": 0
   },
@@ -506,10 +550,16 @@
     "files": [],
     "runOnlyForDeploymentPostprocessing": 0
   },
+  "9DD32B0F230D6A2375894B81": {
+    "isa": "PBXBuildFile",
+    "fileRef": "F9A138342A0D85067878C934"
+  },
   "609D42868CFE64467A2AF7F6": {
     "isa": "PBXResourcesBuildPhase",
     "buildActionMask": 2147483647,
-    "files": [],
+    "files": [
+      "9DD32B0F230D6A2375894B81"
+    ],
     "runOnlyForDeploymentPostprocessing": 0
   },
   "789CE0DB3359EB1D424407E7": {
@@ -866,6 +916,7 @@
     "hasScannedForEncodings": 0,
     "knownRegions": [
       "ru",
+      "en",
       "Base"
     ],
     "mainGroup": "DF891E785808226D241F246E",

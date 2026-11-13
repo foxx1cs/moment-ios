@@ -12,7 +12,7 @@ struct WidgetGuide: View {
                         VStack(alignment: .leading, spacing: 10) {
                             Label("Настройте виджет вручную", systemImage: "slider.horizontal.3")
                                 .font(.headline)
-                            Text("Виджет не может прочитать события приложения в этой установке. Выберите «Вручную» и укажите название, дату и время прямо в настройках виджета.")
+                            Text("Для выбора события из приложения нужны App Groups в подписи приложения и виджета. Выберите «Вручную», чтобы указать название, дату, время и секунды прямо в настройках виджета.")
                                 .font(.subheadline)
                         }
                         .foregroundStyle(Palette.aqua)
@@ -74,8 +74,8 @@ struct WidgetGuide: View {
                 .foregroundStyle(Palette.aqua).frame(width: 32, height: 32)
                 .background(Palette.aqua.opacity(0.1), in: Circle())
             VStack(alignment: .leading, spacing: 6) {
-                Text(title).font(.system(size: 16, weight: .semibold))
-                Text(text).font(.system(size: 14)).foregroundStyle(Palette.muted)
+                Text(LocalizedStringKey(title)).font(.system(size: 16, weight: .semibold))
+                Text(LocalizedStringKey(text)).font(.system(size: 14)).foregroundStyle(Palette.muted)
             }
         }
     }
