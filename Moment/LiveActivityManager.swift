@@ -44,7 +44,9 @@ final class LiveActivityManager: ObservableObject {
         }
 
         let attributes = CountdownActivityAttributes(eventID: event.id)
-        let state = ContentState(event: event, targetDate: targetDate, startedAt: now)
+        let state = CountdownActivityAttributes.ContentState(
+            event: event, targetDate: targetDate, startedAt: now
+        )
         let content = ActivityContent(state: state, staleDate: targetDate)
         _ = try Activity.request(attributes: attributes, content: content, pushType: nil)
         refresh()
@@ -68,7 +70,9 @@ final class LiveActivityManager: ObservableObject {
                 continue
             }
             let targetDate = event.nextOccurrence(after: .now)
-            let state = ContentState(event: event, targetDate: targetDate, startedAt: .now)
+            let state = CountdownActivityAttributes.ContentState(
+                event: event, targetDate: targetDate, startedAt: Date.now
+            )
             await activity.update(ActivityContent(state: state, staleDate: targetDate))
         }
         refresh()
