@@ -268,6 +268,7 @@ def generate():
         **common_info, "CFBundleDisplayName": "Moment", "CFBundlePackageType": "APPL",
         "LSRequiresIPhoneOS": True, "UILaunchScreen": {},
         "NSSupportsLiveActivities": True,
+        "NSCalendarsFullAccessUsageDescription": "Moment lets you select a calendar event to create a countdown.",
         "UIApplicationSceneManifest": {"UIApplicationSupportsMultipleScenes": False},
         "UISupportedInterfaceOrientations": ["UIInterfaceOrientationPortrait"],
         "UISupportedInterfaceOrientations~ipad": ["UIInterfaceOrientationPortrait", "UIInterfaceOrientationPortraitUpsideDown",

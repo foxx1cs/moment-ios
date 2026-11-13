@@ -5,6 +5,12 @@
 	};
 	"objectVersion" = 56;
 	"objects" = {
+		BBFBD244C3A24588153FAB1A = {
+			"isa" = "PBXFileReference";
+			"path" = "Moment/CalendarImportView.swift";
+			"sourceTree" = "<group>";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
 		19193EF35C46C9D9A9535C4D = {
 			"isa" = "PBXFileReference";
 			"path" = "Moment/CountdownDisplay.swift";
@@ -56,6 +62,12 @@
 		36F5F674DB6739F108BC3034 = {
 			"isa" = "PBXFileReference";
 			"path" = "Moment/MomentApp.swift";
+			"sourceTree" = "<group>";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		E87FCC0FD3A3720C9AEBE6F3 = {
+			"isa" = "PBXFileReference";
+			"path" = "Moment/NotificationStatusView.swift";
 			"sourceTree" = "<group>";
 			"lastKnownFileType" = "sourcecode.swift";
 		};
@@ -240,6 +252,7 @@
 		A0233C3C2E52780D419DE39D = {
 			"isa" = "PBXGroup";
 			"children" = (
+				BBFBD244C3A24588153FAB1A,
 				19193EF35C46C9D9A9535C4D,
 				54DBE9C74D58C24C91F3D046,
 				5FC027410D7D3AFE751AC12F,
@@ -249,6 +262,7 @@
 				F84D305F991EFDF8153AC7F9,
 				0EF10EA8D0B082C023DAB385,
 				36F5F674DB6739F108BC3034,
+				E87FCC0FD3A3720C9AEBE6F3,
 				BFD3E8F3032B0766E743B13E,
 				B28215922115674A3075B348,
 				26B074AA5E0474BB510E10CC,
@@ -353,6 +367,10 @@
 			"sourceTree" = "<group>";
 			"name" = "root";
 		};
+		B6E3D57F17333987A4249149 = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = BBFBD244C3A24588153FAB1A;
+		};
 		A60602A2FE065EC68FA677D8 = {
 			"isa" = "PBXBuildFile";
 			"fileRef" = 19193EF35C46C9D9A9535C4D;
@@ -388,6 +406,10 @@
 		482EFD5EE963C2042876D80A = {
 			"isa" = "PBXBuildFile";
 			"fileRef" = 36F5F674DB6739F108BC3034;
+		};
+		3CFC9CC90FBB3E5427555D3B = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = E87FCC0FD3A3720C9AEBE6F3;
 		};
 		4B2E32230CA09BB489753F26 = {
 			"isa" = "PBXBuildFile";
@@ -425,6 +447,7 @@
 			"isa" = "PBXSourcesBuildPhase";
 			"buildActionMask" = 2147483647;
 			"files" = (
+				B6E3D57F17333987A4249149,
 				A60602A2FE065EC68FA677D8,
 				A0A0F7AF6C24F165062FCBB1,
 				78F90F440508A43D416E8B33,
@@ -434,6 +457,7 @@
 				F23F5A57CEAA1DEDB2E22E6D,
 				69E0E1E6A54CB55E7F7C99E2,
 				482EFD5EE963C2042876D80A,
+				3CFC9CC90FBB3E5427555D3B,
 				4B2E32230CA09BB489753F26,
 				93164A455EFB3BFCA8E38923,
 				BF201513042AAEEEB4628CD7,

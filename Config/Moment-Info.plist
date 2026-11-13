@@ -28,6 +28,8 @@
 	<dict/>
 	<key>NSSupportsLiveActivities</key>
 	<true/>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Moment lets you select a calendar event to create a countdown.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

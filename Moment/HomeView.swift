@@ -10,6 +10,11 @@ struct HomeView: View {
     @State private var selectedEvent: CountdownEvent?
     @State private var showCompleted = false
     @State private var searchQuery = ""
+    @State private var selectedCategory = "all"
+    @State private var sortByName = false
+    @State private var showNotificationStatus = false
+    @State private var showCalendar = false
+    @State private var importedCalendarEvent: CountdownEvent?
     @State private var showExporter = false
     @State private var showImporter = false
     @State private var backupDocument = EventBackupDocument(archive: EventArchive())
@@ -53,6 +58,9 @@ struct HomeView: View {
             .sheet(isPresented: $showEditor) { EventEditor() }
             .sheet(isPresented: $showGuide) { WidgetGuide() }
             .sheet(item: $selectedEvent) { EventDetail(eventID: $0.id) }
+            .sheet(isPresented: $showNotificationStatus) { NotificationStatusView() }
+            .sheet(isPresented: $showCalendar) { CalendarImportView { event in importedCalendarEvent = event } }
+            .sheet(item: $importedCalendarEvent) { EventEditor(event: $0, duplicate: true) }
             .fileExporter(isPresented: $showExporter, document: backupDocument,
                           contentType: .json, defaultFilename: "Moment-Events") { result in
                 if case .failure(let error) = result {
@@ -84,6 +92,24 @@ struct HomeView: View {
                     showGuide = true
                     return
                 }
+                if url.scheme == "moment", url.host == "import",
+                   let components = URLComponents(url: url, resolvingAgainstBaseURL: false) {
+                    let items = components.queryItems ?? []
+                    let title = items.first { $0.name == "title" }?.value ?? ""
+                    let raw = items.first { $0.name == "date" }?.value ?? ""
+                    if let timestamp = TimeInterval(raw), timestamp.isFinite,
+                       timestamp > 0, timestamp < 253402300800, !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        let repeats = items.first { $0.name == "repeat" }?.value == "1"
+                        let month = (items.first { $0.name == "month" }?.value).flatMap { Int($0) }
+                        let day = (items.first { $0.name == "day" }?.value).flatMap { Int($0) }
+                        let seconds = (items.first { $0.name == "seconds" }?.value).flatMap { Int($0) }
+                        importedCalendarEvent = CountdownEvent(title: String(title.prefix(60)), date: Date(timeIntervalSince1970: timestamp), repeatsAnnually: repeats,
+                            repeatMonth: month.flatMap { (1...12).contains($0) ? $0 : nil },
+                            repeatDay: day.flatMap { (1...31).contains($0) ? $0 : nil },
+                            repeatSecondsOfDay: seconds.flatMap { (0..<86400).contains($0) ? $0 : nil })
+                    }
+                    return
+                }
                 guard url.scheme == "moment", url.host == "event",
                       let id = UUID(uuidString: url.lastPathComponent) else { return }
                 selectedEvent = store.events.first { $0.id == id }
@@ -112,6 +138,8 @@ struct HomeView: View {
             .accessibilityIdentifier("addEventButton")
             .disabled(!store.isLoaded)
             Menu {
+                Button("Импорт из календаря", systemImage: "calendar.badge.plus") { showCalendar = true }
+                Button("Состояние уведомлений", systemImage: "bell.badge") { showNotificationStatus = true }
                 Button("Экспортировать события", systemImage: "square.and.arrow.up") {
                     backupDocument = EventBackupDocument(archive: store.archive)
                     showExporter = true
@@ -197,10 +225,11 @@ struct HomeView: View {
             let matchesCompletion = showCompleted
                 ? (!event.repeatsAnnually && targetDate <= now)
                 : targetDate > now
-            return matchesQuery && matchesCompletion
+            return matchesQuery && matchesCompletion && (selectedCategory == "all" || event.category == selectedCategory)
         }
         .sorted {
-            showCompleted
+            if sortByName { return $0.title.localizedStandardCompare($1.title) == .orderedAscending }
+            return showCompleted
                 ? $0.nextOccurrence(after: now) > $1.nextOccurrence(after: now)
                 : $0.nextOccurrence(after: now) < $1.nextOccurrence(after: now)
         }
@@ -232,6 +261,20 @@ struct HomeView: View {
                 .padding(.horizontal, 14)
                 .frame(height: 46)
                 .background(Palette.surface, in: RoundedRectangle(cornerRadius: 15))
+                HStack {
+                    Picker("Категория", selection: $selectedCategory) {
+                        Text("Все категории").tag("all")
+                        Text("Личное").tag("personal")
+                        Text("Игры").tag("games")
+                        Text("Путешествия").tag("travel")
+                        Text("Праздники").tag("celebration")
+                        Text("Другое").tag("other")
+                    }
+                    Picker("Сортировка", selection: $sortByName) {
+                        Text("По дате").tag(false)
+                        Text("По названию").tag(true)
+                    }
+                }.pickerStyle(.menu)
             }
             Picker("События", selection: $showCompleted) {
                 Text("Впереди").tag(false)
@@ -239,7 +282,7 @@ struct HomeView: View {
             }
             .pickerStyle(.segmented)
             if events.isEmpty {
-                Text(!query.isEmpty
+                Text(!query.isEmpty || selectedCategory != "all"
                      ? "События не найдены. Попробуйте другой запрос."
                      : showCompleted ? "Здесь будут ваши прошедшие моменты."
                      : "Добавьте то, чего ждёте с нетерпением.")

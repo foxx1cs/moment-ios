@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct CountdownDisplay: View {
     let components: CountdownComponents
@@ -77,8 +78,8 @@ struct EventHero: View {
             }
             CountdownDisplay(components: event.remaining(at: now))
             GeometryReader { geometry in
-                Capsule().fill(Palette.ink.opacity(0.10))
-                Capsule().fill(Palette.ink.opacity(0.6))
+                Capsule().fill((event.photoData == nil ? Palette.ink : .white).opacity(0.15))
+                Capsule().fill((event.photoData == nil ? Palette.ink : .white).opacity(0.7))
                     .frame(width: max(0, geometry.size.width * event.progress(at: now)))
             }
             .frame(height: 3)
@@ -92,11 +93,20 @@ struct EventHero: View {
             .opacity(0.6)
         }
         .padding(24)
-        .foregroundStyle(Palette.ink)
+        .foregroundStyle(event.photoData == nil ? Palette.ink : .white)
         .background {
             RoundedRectangle(cornerRadius: 30)
                 .fill(LinearGradient(colors: [event.theme.color, event.theme.color.opacity(0.82)],
                                      startPoint: .topLeading, endPoint: .bottomTrailing))
+                .overlay {
+                    if let data = event.photoData, let image = UIImage(data: data) {
+                        GeometryReader { geometry in
+                            Image(uiImage: image).resizable().scaledToFill()
+                                .frame(width: geometry.size.width, height: geometry.size.height).clipped()
+                                .overlay(.black.opacity(0.58))
+                        }
+                    }
+                }
                 .overlay(alignment: .topTrailing) {
                     Circle().stroke(.white.opacity(0.12), lineWidth: 45)
                         .frame(width: 220, height: 220).offset(x: 90, y: -100)

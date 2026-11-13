@@ -1,4 +1,6 @@
 import SwiftUI
+import PhotosUI
+import UIKit
 
 struct EventEditor: View {
     @EnvironmentObject private var store: EventStore
@@ -12,6 +14,9 @@ struct EventEditor: View {
     @State private var symbol: String
     @State private var theme: EventTheme
     @State private var note: String
+    @State private var category: String
+    @State private var photoData: Data?
+    @State private var selectedPhoto: PhotosPickerItem?
     @State private var reminderOffsets: Set<Int>
     @State private var customReminderAmount = 2
     @State private var customReminderUnit: CustomReminderUnit = .days
@@ -81,6 +86,8 @@ struct EventEditor: View {
         _symbol = State(initialValue: event?.symbol ?? "sparkles")
         _theme = State(initialValue: event?.theme ?? .aqua)
         _note = State(initialValue: event?.note ?? "")
+        _category = State(initialValue: event?.category ?? "personal")
+        _photoData = State(initialValue: event?.photoData)
         _reminderOffsets = State(initialValue: Set(event?.reminderOffsets ?? []))
         _repeatsAnnually = State(initialValue: event?.repeatsAnnually ?? false)
     }
@@ -162,6 +169,23 @@ struct EventEditor: View {
                         .lineLimit(3...5)
                         .onChange(of: note) { _, value in note = String(value.prefix(240)) }
                 }
+                Section("Категория") {
+                    Picker("Категория", selection: $category) {
+                        Text("Личное").tag("personal")
+                        Text("Игры").tag("games")
+                        Text("Путешествия").tag("travel")
+                        Text("Праздники").tag("celebration")
+                        Text("Другое").tag("other")
+                    }
+                }
+                Section("Фотография") {
+                    if let photoData, let image = UIImage(data: photoData) {
+                        Image(uiImage: image).resizable().scaledToFill()
+                            .frame(height: 150).clipped().clipShape(RoundedRectangle(cornerRadius: 12))
+                        Button("Удалить фото", role: .destructive) { self.photoData = nil; selectedPhoto = nil }
+                    }
+                    PhotosPicker("Выбрать фото", selection: $selectedPhoto, matching: .images)
+                }
                 Section("Повторение") {
                     Toggle("Повторять каждый год", isOn: $repeatsAnnually)
                     if repeatsAnnually {
@@ -223,6 +247,17 @@ struct EventEditor: View {
             }
             .scrollContentBackground(.hidden)
             .background(Palette.background)
+            .onChange(of: selectedPhoto) { _, item in
+                Task {
+                    guard let item, let data = try? await item.loadTransferable(type: Data.self),
+                          let image = UIImage(data: data), image.size.width > 0, image.size.height > 0 else { return }
+                    let ratio = min(1, 900 / max(image.size.width, image.size.height))
+                    let size = CGSize(width: image.size.width * ratio, height: image.size.height * ratio)
+                    let renderer = UIGraphicsImageRenderer(size: size)
+                    photoData = renderer.image { _ in image.draw(in: CGRect(origin: .zero, size: size)) }
+                        .jpegData(compressionQuality: 0.65)
+                }
+            }
             .navigationTitle(original == nil ? "Новый момент" : "Изменить момент")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -252,7 +287,8 @@ struct EventEditor: View {
                                    reminderOffsets: Array(reminderOffsets).sorted(by: >),
                                    repeatsAnnually: repeatsAnnually,
                                    repeatMonth: preserveAnnualDate ? source?.repeatMonth : nil,
-                                   repeatDay: preserveAnnualDate ? source?.repeatDay : nil)
+                                   repeatDay: preserveAnnualDate ? source?.repeatDay : nil,
+                                   category: category, photoData: photoData)
         if store.save(event) { dismiss() }
         else {
             saveError = store.errorMessage

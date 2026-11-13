@@ -55,6 +55,12 @@ final class CountdownTests: XCTestCase {
         XCTAssertEqual(try JSONDecoder().decode(EventArchive.self, from: data), archive)
     }
 
+    func testArchiveKeepsCategoryAndPhoto() throws {
+        let event = CountdownEvent(title: "Trip", date: now, category: "travel", photoData: Data([1, 2, 3]))
+        let archive = EventArchive(events: [event], pinnedID: event.id)
+        XCTAssertEqual(try JSONDecoder().decode(EventArchive.self, from: JSONEncoder().encode(archive)), archive)
+    }
+
     func testSharedStoreAtomicReplacementAndCorruption() throws {
         let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)

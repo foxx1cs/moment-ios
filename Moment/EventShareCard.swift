@@ -76,6 +76,10 @@ private struct EventShareCard: View {
         ZStack {
             LinearGradient(colors: [Palette.background, Palette.surface, event.theme.color.opacity(0.35)],
                            startPoint: .topLeading, endPoint: .bottomTrailing)
+            if let data = event.photoData, let image = UIImage(data: data) {
+                Image(uiImage: image).resizable().scaledToFill()
+                    .frame(width: 360, height: 640).clipped().overlay(.black.opacity(0.65))
+            }
             Circle()
                 .fill(event.theme.color.opacity(0.22))
                 .frame(width: 350, height: 350)

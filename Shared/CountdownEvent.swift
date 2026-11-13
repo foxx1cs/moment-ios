@@ -13,11 +13,14 @@ struct CountdownEvent: Identifiable, Codable, Equatable, Sendable {
     var repeatMonth: Int?
     var repeatDay: Int?
     var repeatSecondsOfDay: Int?
+    var category: String
+    var photoData: Data?
 
     init(id: UUID = UUID(), title: String, date: Date, createdAt: Date = .now,
          symbol: String = "sparkles", theme: EventTheme = .aqua, note: String = "",
          reminderOffsets: [Int] = [], repeatsAnnually: Bool = false,
-         repeatMonth: Int? = nil, repeatDay: Int? = nil, repeatSecondsOfDay: Int? = nil) {
+         repeatMonth: Int? = nil, repeatDay: Int? = nil, repeatSecondsOfDay: Int? = nil,
+         category: String = "personal", photoData: Data? = nil) {
         self.id = id
         self.title = title
         self.date = date
@@ -27,6 +30,8 @@ struct CountdownEvent: Identifiable, Codable, Equatable, Sendable {
         self.note = note
         self.reminderOffsets = reminderOffsets
         self.repeatsAnnually = repeatsAnnually
+        self.category = category
+        self.photoData = photoData
         let parts = Calendar.current.dateComponents([.month, .day, .hour, .minute, .second], from: date)
         self.repeatMonth = repeatsAnnually ? (repeatMonth ?? parts.month) : nil
         self.repeatDay = repeatsAnnually ? (repeatDay ?? parts.day) : nil
@@ -38,6 +43,7 @@ struct CountdownEvent: Identifiable, Codable, Equatable, Sendable {
     private enum CodingKeys: String, CodingKey {
         case id, title, date, createdAt, symbol, theme, note, reminderOffsets
         case repeatsAnnually, repeatMonth, repeatDay, repeatSecondsOfDay
+        case category, photoData
     }
 
     init(from decoder: Decoder) throws {
@@ -50,6 +56,8 @@ struct CountdownEvent: Identifiable, Codable, Equatable, Sendable {
         theme = try values.decodeIfPresent(EventTheme.self, forKey: .theme) ?? .aqua
         note = try values.decodeIfPresent(String.self, forKey: .note) ?? ""
         reminderOffsets = try values.decodeIfPresent([Int].self, forKey: .reminderOffsets) ?? []
+        category = try values.decodeIfPresent(String.self, forKey: .category) ?? "personal"
+        photoData = try values.decodeIfPresent(Data.self, forKey: .photoData)
         repeatsAnnually = try values.decodeIfPresent(Bool.self, forKey: .repeatsAnnually) ?? false
         repeatMonth = try values.decodeIfPresent(Int.self, forKey: .repeatMonth)
         repeatDay = try values.decodeIfPresent(Int.self, forKey: .repeatDay)
