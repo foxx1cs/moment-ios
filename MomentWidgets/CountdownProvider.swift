@@ -12,7 +12,8 @@ struct CountdownEntry: TimelineEntry {
 
 struct CountdownProvider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> CountdownEntry {
-        CountdownEntry(date: .now, event: .preview, targetDate: .preview.date)
+        let preview = CountdownEvent.preview
+        return CountdownEntry(date: .now, event: preview, targetDate: preview.date)
     }
 
     func snapshot(for configuration: CountdownConfiguration, in context: Context) async -> CountdownEntry {
@@ -41,7 +42,7 @@ struct CountdownProvider: AppIntentTimelineProvider {
             let event = ManualWidgetEvent.make(title: configuration.manualTitle,
                                                date: configuration.targetDate,
                                                seconds: configuration.seconds, now: now)
-            return CountdownEntry(date: now, event: event, targetDate: event.date, manual: true)
+            return CountdownEntry(date: now, event: event, targetDate: event?.date, manual: true)
         }
         do {
             let archive = try SharedStore.live().read()
