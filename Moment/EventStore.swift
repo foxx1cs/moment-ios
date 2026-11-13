@@ -59,6 +59,7 @@ final class EventStore: ObservableObject {
             isLoaded = true
             errorMessage = nil
             syncWidgets()
+            Task { await LiveActivityManager.shared.reconcile(events: archive.events) }
         } catch {
             isLoaded = false
             widgetsAvailable = false
@@ -130,6 +131,7 @@ final class EventStore: ObservableObject {
             Task {
                 await ReminderScheduler.sync(events: next.events,
                                              requestAuthorization: requestReminderPermission)
+                await LiveActivityManager.shared.reconcile(events: next.events)
             }
             return true
         } catch {

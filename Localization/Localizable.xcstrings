@@ -286,7 +286,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "IT'S HERE"
+            "value": "THE MOMENT IS HERE"
           }
         }
       }
@@ -1537,6 +1537,296 @@
           "stringUnit": {
             "state": "translated",
             "value": "Progress to event"
+          }
+        }
+      }
+    },
+    "Создать карточку для публикации": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create a post card"
+          }
+        }
+      }
+    },
+    "Поделиться карточкой": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share image"
+          }
+        }
+      }
+    },
+    "Подготовка карточки…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparing the card…"
+          }
+        }
+      }
+    },
+    "Не удалось создать карточку": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not create the card"
+          }
+        }
+      }
+    },
+    "Карточка события": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Event card"
+          }
+        }
+      }
+    },
+    "СЛЕДУЮЩАЯ ДАТА": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NEXT OCCURRENCE"
+          }
+        }
+      }
+    },
+    "ДО ВАШЕГО СОБЫТИЯ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "COUNTING DOWN TO"
+          }
+        }
+      }
+    },
+    "ПОВТОРЯЕТСЯ КАЖДЫЙ ГОД": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "REPEATS EVERY YEAR"
+          }
+        }
+      }
+    },
+    "Показать Live Activity": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start Live Activity"
+          }
+        }
+      }
+    },
+    "Остановить Live Activity": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop Live Activity"
+          }
+        }
+      }
+    },
+    "Live Activity остановлена.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Live Activity stopped."
+          }
+        }
+      }
+    },
+    "Отсчёт добавлен на экран блокировки.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Countdown added to the Lock Screen."
+          }
+        }
+      }
+    },
+    "Live Activity доступна в последние 8 часов перед событием. Её показом управляет iOS.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Live Activity is available during the final 8 hours before an event. iOS controls how long it remains visible."
+          }
+        }
+      }
+    },
+    "Разрешите Live Activities в настройках iPhone.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow Live Activities in iPhone Settings."
+          }
+        }
+      }
+    },
+    "Live Activity можно запустить в пределах 8 часов до события.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You can start a Live Activity within 8 hours of the event."
+          }
+        }
+      }
+    },
+    "Осталось времени": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time remaining"
+          }
+        }
+      }
+    },
+    "Поиск событий и заметок": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search events and notes"
+          }
+        }
+      }
+    },
+    "Очистить поиск": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear search"
+          }
+        }
+      }
+    },
+    "События не найдены. Попробуйте другой запрос.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No events found. Try another search."
+          }
+        }
+      }
+    },
+    "Свои напоминания": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Custom reminders"
+          }
+        }
+      }
+    },
+    "За": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Before"
+          }
+        }
+      }
+    },
+    "Количество": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amount"
+          }
+        }
+      }
+    },
+    "Единица": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unit"
+          }
+        }
+      }
+    },
+    "Недели": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weeks"
+          }
+        }
+      }
+    },
+    "Добавить своё напоминание": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add custom reminder"
+          }
+        }
+      }
+    },
+    "Удалить напоминание": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove reminder"
+          }
+        }
+      }
+    },
+    "Выберите интервал до 180 дней до события.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose how far in advance to be reminded, up to 180 days."
+          }
+        }
+      }
+    },
+    "н": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wk"
+          }
+        }
+      }
+    },
+    "Разрешите Live Activities в настройках iPhone: Настройки → Приложения → Moment → Live Activities.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow Live Activities in Settings → Apps → Moment → Live Activities."
           }
         }
       }

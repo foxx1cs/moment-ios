@@ -3,10 +3,13 @@ import SwiftUI
 struct EventDetail: View {
     let eventID: UUID
     @EnvironmentObject private var store: EventStore
+    @EnvironmentObject private var liveActivities: LiveActivityManager
     @Environment(\.dismiss) private var dismiss
     @State private var showEditor = false
     @State private var confirmDelete = false
     @State private var showGuide = false
+    @State private var showShareCard = false
+    @State private var liveActivityMessage: String?
 
     private var event: CountdownEvent? { store.events.first { $0.id == eventID } }
 
@@ -30,6 +33,43 @@ struct EventDetail: View {
                                 Label("Поделиться отсчётом", systemImage: "square.and.arrow.up")
                                     .frame(maxWidth: .infinity).padding(16)
                                     .background(Palette.surface, in: RoundedRectangle(cornerRadius: 16))
+                            }
+                            Button { showShareCard = true } label: {
+                                Label("Создать карточку для публикации", systemImage: "photo")
+                                    .frame(maxWidth: .infinity).padding(16)
+                                    .background(Palette.surface, in: RoundedRectangle(cornerRadius: 16))
+                            }
+                            let liveActive = liveActivities.isActive(for: event.id)
+                            Button {
+                                Task {
+                                    if liveActive {
+                                        await liveActivities.stop(eventID: event.id)
+                                        liveActivityMessage = String(localized: "Live Activity остановлена.")
+                                    } else {
+                                        do {
+                                            try await liveActivities.start(event: event)
+                                            liveActivityMessage = String(localized: "Отсчёт добавлен на экран блокировки.")
+                                        } catch {
+                                            liveActivityMessage = error.localizedDescription
+                                        }
+                                    }
+                                }
+                            } label: {
+                                Label(liveActive ? "Остановить Live Activity" : "Показать Live Activity",
+                                      systemImage: liveActive ? "stop.circle" : "bolt.horizontal.circle")
+                                    .frame(maxWidth: .infinity).padding(16)
+                                    .background(Palette.surface, in: RoundedRectangle(cornerRadius: 16))
+                            }
+                            .disabled(!liveActive && !liveActivities.canStart(event: event))
+                            if let liveActivityMessage {
+                                Text(liveActivityMessage)
+                                    .font(.footnote).foregroundStyle(Palette.muted)
+                            } else if !liveActive && !liveActivities.activitiesEnabled {
+                                Text("Разрешите Live Activities в настройках iPhone: Настройки → Приложения → Moment → Live Activities.")
+                                    .font(.footnote).foregroundStyle(Palette.muted)
+                            } else if !liveActive && !liveActivities.canStart(event: event) {
+                                Text("Live Activity доступна в последние 8 часов перед событием. Её показом управляет iOS.")
+                                    .font(.footnote).foregroundStyle(Palette.muted)
                             }
                             Button {
                                 store.pin(event)
@@ -68,6 +108,7 @@ struct EventDetail: View {
             }
             .sheet(isPresented: $showEditor) { if let event { EventEditor(event: event) } }
             .sheet(isPresented: $showGuide) { WidgetGuide() }
+            .sheet(isPresented: $showShareCard) { if let event { EventImageShareSheet(event: event) } }
             .confirmationDialog("Удалить событие? Оно исчезнет и из виджета.",
                                 isPresented: $confirmDelete, titleVisibility: .visible) {
                 Button("Удалить", role: .destructive) {

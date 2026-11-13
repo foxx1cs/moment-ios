@@ -267,6 +267,7 @@ def generate():
     write_plist("Config/Moment-Info.plist", {
         **common_info, "CFBundleDisplayName": "Moment", "CFBundlePackageType": "APPL",
         "LSRequiresIPhoneOS": True, "UILaunchScreen": {},
+        "NSSupportsLiveActivities": True,
         "UIApplicationSceneManifest": {"UIApplicationSupportsMultipleScenes": False},
         "UISupportedInterfaceOrientations": ["UIInterfaceOrientationPortrait"],
         "UISupportedInterfaceOrientations~ipad": ["UIInterfaceOrientationPortrait", "UIInterfaceOrientationPortraitUpsideDown",

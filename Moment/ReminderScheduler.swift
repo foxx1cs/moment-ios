@@ -4,7 +4,7 @@ import UserNotifications
 enum ReminderScheduler {
     private static let identifierPrefix = "moment.reminder."
     private static let maximumPendingRequests = 64
-    private static let supportedOffsets: Set<Int> = [0, 3_600, 86_400, 604_800]
+    private static let maximumOffset = 180 * 86_400
 
     static func sync(events: [CountdownEvent], requestAuthorization: Bool) async {
         let center = UNUserNotificationCenter.current()
@@ -17,7 +17,7 @@ enum ReminderScheduler {
         let reminders = events.flatMap { event in
             let targetDate = event.nextOccurrence(after: now)
             return Set(event.reminderOffsets)
-                .intersection(supportedOffsets)
+                .filter { (0...maximumOffset).contains($0) }
                 .map { Reminder(event: event, offset: $0, fireDate: targetDate.addingTimeInterval(-Double($0))) }
         }
         .filter { $0.event.repeatsAnnually || $0.fireDate > now }

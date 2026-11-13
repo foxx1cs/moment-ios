@@ -11,6 +11,8 @@ struct EventEditor: View {
     @State private var theme: EventTheme
     @State private var note: String
     @State private var reminderOffsets: Set<Int>
+    @State private var customReminderAmount = 2
+    @State private var customReminderUnit: CustomReminderUnit = .days
     @State private var repeatsAnnually: Bool
     @State private var saveError: String?
     private enum Field: Hashable { case title, note }
@@ -29,6 +31,36 @@ struct EventEditor: View {
             case .day: return "За день"
             case .hour: return "За час"
             case .moment: return "В момент события"
+            }
+        }
+    }
+
+    private enum CustomReminderUnit: String, CaseIterable, Identifiable {
+        case minutes, hours, days, weeks
+
+        var id: String { rawValue }
+        var seconds: Int {
+            switch self {
+            case .minutes: return 60
+            case .hours: return 3_600
+            case .days: return 86_400
+            case .weeks: return 604_800
+            }
+        }
+        var title: LocalizedStringKey {
+            switch self {
+            case .minutes: return "Минуты"
+            case .hours: return "Часы"
+            case .days: return "Дни"
+            case .weeks: return "Недели"
+            }
+        }
+        var shortName: String {
+            switch self {
+            case .minutes: return String(localized: "м")
+            case .hours: return String(localized: "ч")
+            case .days: return String(localized: "д")
+            case .weeks: return String(localized: "н")
             }
         }
     }
@@ -140,6 +172,44 @@ struct EventEditor: View {
                     Text("При первом сохранении напоминаний iOS запросит доступ к уведомлениям. Уже прошедшее время напоминания не отправляется.")
                         .font(.footnote).foregroundStyle(Palette.muted)
                 } header: { Text("Напоминания") }
+                Section {
+                    HStack(spacing: 8) {
+                        Text("За")
+                        Text(String(customReminderAmount)).monospacedDigit()
+                        Stepper("Количество", value: $customReminderAmount,
+                                in: 1...max(1, 180 * 86_400 / customReminderUnit.seconds))
+                            .labelsHidden()
+                        Picker("Единица", selection: $customReminderUnit) {
+                            ForEach(CustomReminderUnit.allCases) { unit in
+                                Text(unit.title).tag(unit)
+                            }
+                        }
+                        .pickerStyle(.menu)
+                        .labelsHidden()
+                        .onChange(of: customReminderUnit) { _, unit in
+                            customReminderAmount = min(customReminderAmount, 180 * 86_400 / unit.seconds)
+                        }
+                    }
+                    Button {
+                        reminderOffsets.insert(customReminderAmount * customReminderUnit.seconds)
+                    } label: {
+                        Label("Добавить своё напоминание", systemImage: "plus.circle")
+                    }
+                    .disabled(reminderOffsets.contains(customReminderAmount * customReminderUnit.seconds))
+
+                    ForEach(customReminderOffsets, id: \.self) { offset in
+                        HStack {
+                            Label(customReminderDescription(offset), systemImage: "bell")
+                            Spacer()
+                            Button(role: .destructive) { reminderOffsets.remove(offset) } label: {
+                                Image(systemName: "minus.circle")
+                            }
+                            .accessibilityLabel("Удалить напоминание")
+                        }
+                    }
+                } header: { Text("Свои напоминания") } footer: {
+                    Text("Выберите интервал до 180 дней до события.")
+                }
                 if targetDate <= .now {
                     Section { Text("Выберите дату и время в будущем.").foregroundStyle(.orange) }
                 }
@@ -190,6 +260,19 @@ struct EventEditor: View {
                 else { reminderOffsets.remove(offset) }
             }
         )
+    }
+
+    private var customReminderOffsets: [Int] {
+        let standard = Set(ReminderChoice.allCases.map(\.rawValue))
+        return reminderOffsets.subtracting(standard).sorted(by: >)
+    }
+
+    private func customReminderDescription(_ offset: Int) -> String {
+        let units = [CustomReminderUnit.weeks, .days, .hours, .minutes]
+        if let unit = units.first(where: { offset >= $0.seconds && offset % $0.seconds == 0 }) {
+            return "\(String(localized: "За")) \(offset / unit.seconds) \(unit.shortName)"
+        }
+        return "\(String(localized: "За")) \(offset) \(String(localized: "с"))"
     }
 
     private func symbolName(_ symbol: String) -> String {

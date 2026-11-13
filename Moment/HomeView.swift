@@ -8,6 +8,7 @@ struct HomeView: View {
     @State private var showGuide = false
     @State private var selectedEvent: CountdownEvent?
     @State private var showCompleted = false
+    @State private var searchQuery = ""
     @State private var showExporter = false
     @State private var showImporter = false
     @State private var backupDocument = EventBackupDocument(archive: EventArchive())
@@ -179,10 +180,16 @@ struct HomeView: View {
     }
 
     private func eventsSection(now: Date) -> some View {
-        let events = store.events.filter {
-            showCompleted
-                ? (!$0.repeatsAnnually && $0.nextOccurrence(after: now) <= now)
-                : $0.nextOccurrence(after: now) > now
+        let query = searchQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+        let events = store.events.filter { event in
+            let matchesQuery = query.isEmpty
+                || event.title.localizedStandardContains(query)
+                || event.note.localizedStandardContains(query)
+            let targetDate = event.nextOccurrence(after: now)
+            let matchesCompletion = showCompleted
+                ? (!event.repeatsAnnually && targetDate <= now)
+                : targetDate > now
+            return matchesQuery && matchesCompletion
         }
         .sorted {
             showCompleted
@@ -197,13 +204,37 @@ struct HomeView: View {
                     .padding(7).background(Palette.surface, in: Circle())
                 Spacer()
             }
+            if !store.events.isEmpty {
+                HStack(spacing: 10) {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundStyle(Palette.muted)
+                    TextField("Поиск событий и заметок", text: $searchQuery)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .accessibilityIdentifier("eventSearchField")
+                    if !searchQuery.isEmpty {
+                        Button { searchQuery = "" } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundStyle(Palette.muted)
+                        }
+                        .accessibilityLabel("Очистить поиск")
+                    }
+                }
+                .font(.system(size: 14))
+                .padding(.horizontal, 14)
+                .frame(height: 46)
+                .background(Palette.surface, in: RoundedRectangle(cornerRadius: 15))
+            }
             Picker("События", selection: $showCompleted) {
                 Text("Впереди").tag(false)
                 Text("Завершённые").tag(true)
             }
             .pickerStyle(.segmented)
             if events.isEmpty {
-                Text(showCompleted ? "Здесь будут ваши прошедшие моменты." : "Добавьте то, чего ждёте с нетерпением.")
+                Text(!query.isEmpty
+                     ? "События не найдены. Попробуйте другой запрос."
+                     : showCompleted ? "Здесь будут ваши прошедшие моменты."
+                     : "Добавьте то, чего ждёте с нетерпением.")
                     .font(.subheadline).foregroundStyle(Palette.muted)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.vertical, 20)

@@ -1,7 +1,6 @@
 import SwiftUI
 import WidgetKit
 
-@main
 struct MomentWidgets: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: SharedStore.widgetKind,
