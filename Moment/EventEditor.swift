@@ -4,6 +4,8 @@ struct EventEditor: View {
     @EnvironmentObject private var store: EventStore
     @Environment(\.dismiss) private var dismiss
     private let original: CountdownEvent?
+    private let source: CountdownEvent?
+    private let initialDate: Date
     @State private var title: String
     @State private var date: Date
     @State private var seconds: Int
@@ -67,10 +69,12 @@ struct EventEditor: View {
 
     private let symbols = ["sparkles", "airplane", "gift", "heart", "music.note", "gamecontroller", "graduationcap", "sun.max", "house", "flag.checkered", "party.popper", "moon.stars"]
 
-    init(event: CountdownEvent? = nil) {
-        original = event
+    init(event: CountdownEvent? = nil, duplicate: Bool = false) {
+        original = duplicate ? nil : event
         let initial = event?.nextOccurrence(after: .now)
             ?? Calendar.current.date(byAdding: .day, value: 1, to: .now)!
+        source = event
+        initialDate = initial
         _title = State(initialValue: event?.title ?? "")
         _date = State(initialValue: initial)
         _seconds = State(initialValue: Calendar.current.component(.second, from: initial))
@@ -240,11 +244,15 @@ struct EventEditor: View {
 
     private func save() {
         guard !cleanTitle.isEmpty, targetDate > .now else { return }
+        let preserveAnnualDate = source?.repeatsAnnually == true && repeatsAnnually
+            && Calendar.current.isDate(targetDate, inSameDayAs: initialDate)
         let event = CountdownEvent(id: original?.id ?? UUID(), title: cleanTitle, date: targetDate,
                                    createdAt: original?.createdAt ?? .now, symbol: symbol, theme: theme,
                                    note: note.trimmingCharacters(in: .whitespacesAndNewlines),
                                    reminderOffsets: Array(reminderOffsets).sorted(by: >),
-                                   repeatsAnnually: repeatsAnnually)
+                                   repeatsAnnually: repeatsAnnually,
+                                   repeatMonth: preserveAnnualDate ? source?.repeatMonth : nil,
+                                   repeatDay: preserveAnnualDate ? source?.repeatDay : nil)
         if store.save(event) { dismiss() }
         else {
             saveError = store.errorMessage

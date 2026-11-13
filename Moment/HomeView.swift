@@ -3,6 +3,7 @@ import UniformTypeIdentifiers
 
 struct HomeView: View {
     @EnvironmentObject private var store: EventStore
+    @EnvironmentObject private var notificationRouter: NotificationRouter
     @Environment(\.scenePhase) private var scenePhase
     @State private var showEditor = false
     @State private var showGuide = false
@@ -70,6 +71,13 @@ struct HomeView: View {
             } message: { Text(store.errorMessage ?? "") }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active { store.reload() }
+            }
+            .onChange(of: notificationRouter.pendingEventID, initial: true) { _, id in
+                guard let id else { return }
+                showEditor = false
+                showGuide = false
+                selectedEvent = store.events.first { $0.id == id }
+                notificationRouter.pendingEventID = nil
             }
             .onOpenURL { url in
                 if url.scheme == "moment", url.host == "widgets" {
@@ -326,4 +334,9 @@ private struct EventRow: View {
     }
 }
 
-#Preview { HomeView().environmentObject(EventStore()) }
+#Preview {
+    HomeView()
+        .environmentObject(EventStore())
+        .environmentObject(NotificationRouter.shared)
+        .environmentObject(LiveActivityManager.shared)
+}

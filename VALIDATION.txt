@@ -1,9 +1,9 @@
-Version: 1.2.0 (build 6)
+Version: 1.3.0 (build 7)
 Architecture: arm64
 Minimum iOS: 17.0
 Build: Xcode 16.4 archive and unsigned IPA packaging
-Simulator tests: not run for this release
-Output: Moment-1.2.0.ipa, pending bytes
+Simulator tests: focused reminder planning checks in the release workflow; see Actions for results
+Output: Moment-1.3.0.ipa, pending bytes
 SHA-256: pending
 
-Live Activities are enabled in the app Info.plist and use a system-rendered timer. Earlier event archives decode with no custom reminders or annual recurrence enabled. Exported JSON backups use ISO 8601 dates and import merges by event ID. Simulator tests are intentionally omitted from the build-only release workflow.
+Annual reminders are planned as individual dates and replenished on launch, with the earliest 64 retained. Notification taps route to the corresponding event. Live Activities use a system-rendered timer. Exported JSON backups use ISO 8601 dates and import merges by event ID.

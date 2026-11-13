@@ -11,6 +11,7 @@ final class EventStore: ObservableObject {
     private let localStoreProvider: () throws -> SharedStore
     private let sharedStoreProvider: () throws -> SharedStore
     private let reloadWidgets: () -> Void
+    private var reminderTask: Task<Void, Never>?
 
     convenience init() {
         #if DEBUG
@@ -59,6 +60,7 @@ final class EventStore: ObservableObject {
             isLoaded = true
             errorMessage = nil
             syncWidgets()
+            scheduleReminders(events: archive.events)
             Task { await LiveActivityManager.shared.reconcile(events: archive.events) }
         } catch {
             isLoaded = false
@@ -128,15 +130,20 @@ final class EventStore: ObservableObject {
             try localStoreProvider().write(next)
             archive = next
             syncWidgets()
-            Task {
-                await ReminderScheduler.sync(events: next.events,
-                                             requestAuthorization: requestReminderPermission)
-                await LiveActivityManager.shared.reconcile(events: next.events)
-            }
+            scheduleReminders(events: next.events, requestAuthorization: requestReminderPermission)
+            Task { await LiveActivityManager.shared.reconcile(events: next.events) }
             return true
         } catch {
             errorMessage = error.localizedDescription
             return false
+        }
+    }
+
+    private func scheduleReminders(events: [CountdownEvent], requestAuthorization: Bool = false) {
+        let previous = reminderTask
+        reminderTask = Task {
+            await previous?.value
+            await ReminderScheduler.sync(events: events, requestAuthorization: requestAuthorization)
         }
     }
 

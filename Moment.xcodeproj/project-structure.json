@@ -53,6 +53,12 @@
     "sourceTree": "<group>",
     "lastKnownFileType": "sourcecode.swift"
   },
+  "BFD3E8F3032B0766E743B13E": {
+    "isa": "PBXFileReference",
+    "path": "Moment/ReminderPlan.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
   "B28215922115674A3075B348": {
     "isa": "PBXFileReference",
     "path": "Moment/ReminderScheduler.swift",
@@ -134,6 +140,12 @@
   "5F32C492792DF78FF2492C4A": {
     "isa": "PBXFileReference",
     "path": "MomentTests/ManualWidgetTests.swift",
+    "sourceTree": "<group>",
+    "lastKnownFileType": "sourcecode.swift"
+  },
+  "C9F189DFE9B5DC96F568D349": {
+    "isa": "PBXFileReference",
+    "path": "MomentTests/ReminderPlanTests.swift",
     "sourceTree": "<group>",
     "lastKnownFileType": "sourcecode.swift"
   },
@@ -231,6 +243,7 @@
       "F84D305F991EFDF8153AC7F9",
       "0EF10EA8D0B082C023DAB385",
       "36F5F674DB6739F108BC3034",
+      "BFD3E8F3032B0766E743B13E",
       "B28215922115674A3075B348",
       "26B074AA5E0474BB510E10CC",
       "B4E5998C67ADF64E0E9F2043",
@@ -267,7 +280,8 @@
     "children": [
       "6CAD4DD3CEE3F087DD403C1A",
       "28F41A205EF8396199C86DC1",
-      "5F32C492792DF78FF2492C4A"
+      "5F32C492792DF78FF2492C4A",
+      "C9F189DFE9B5DC96F568D349"
     ],
     "sourceTree": "<group>",
     "name": "MomentTests"
@@ -369,6 +383,10 @@
     "isa": "PBXBuildFile",
     "fileRef": "36F5F674DB6739F108BC3034"
   },
+  "4B2E32230CA09BB489753F26": {
+    "isa": "PBXBuildFile",
+    "fileRef": "BFD3E8F3032B0766E743B13E"
+  },
   "93164A455EFB3BFCA8E38923": {
     "isa": "PBXBuildFile",
     "fileRef": "B28215922115674A3075B348"
@@ -410,6 +428,7 @@
       "F23F5A57CEAA1DEDB2E22E6D",
       "69E0E1E6A54CB55E7F7C99E2",
       "482EFD5EE963C2042876D80A",
+      "4B2E32230CA09BB489753F26",
       "93164A455EFB3BFCA8E38923",
       "BF201513042AAEEEB4628CD7",
       "014D1AC50AFEBEA41FB3B23A",
@@ -689,13 +708,18 @@
     "isa": "PBXBuildFile",
     "fileRef": "5F32C492792DF78FF2492C4A"
   },
+  "77A1BABB8AAF1EE5FFA2852A": {
+    "isa": "PBXBuildFile",
+    "fileRef": "C9F189DFE9B5DC96F568D349"
+  },
   "CA2BF3E1BA6BE8C90F717535": {
     "isa": "PBXSourcesBuildPhase",
     "buildActionMask": 2147483647,
     "files": [
       "2CED208598DB6D07F3E6EC00",
       "90F7AE602176D03D3551C02E",
-      "0C05D93B81AED1F34DDB7BA4"
+      "0C05D93B81AED1F34DDB7BA4",
+      "77A1BABB8AAF1EE5FFA2852A"
     ],
     "runOnlyForDeploymentPostprocessing": 0
   },

@@ -5,6 +5,7 @@ import UserNotifications
 struct MomentApp: App {
     @StateObject private var store = EventStore()
     @StateObject private var liveActivities = LiveActivityManager.shared
+    @StateObject private var notificationRouter = NotificationRouter.shared
 
     init() {
         UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
@@ -15,6 +16,7 @@ struct MomentApp: App {
             HomeView()
                 .environmentObject(store)
                 .environmentObject(liveActivities)
+                .environmentObject(notificationRouter)
                 .preferredColorScheme(.dark)
                 .tint(Palette.aqua)
         }

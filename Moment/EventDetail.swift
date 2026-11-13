@@ -9,6 +9,7 @@ struct EventDetail: View {
     @State private var confirmDelete = false
     @State private var showGuide = false
     @State private var showShareCard = false
+    @State private var showDuplicate = false
     @State private var liveActivityMessage: String?
 
     private var event: CountdownEvent? { store.events.first { $0.id == eventID } }
@@ -36,6 +37,11 @@ struct EventDetail: View {
                             }
                             Button { showShareCard = true } label: {
                                 Label("Создать карточку для публикации", systemImage: "photo")
+                                    .frame(maxWidth: .infinity).padding(16)
+                                    .background(Palette.surface, in: RoundedRectangle(cornerRadius: 16))
+                            }
+                            Button { showDuplicate = true } label: {
+                                Label("Создать копию события", systemImage: "plus.square.on.square")
                                     .frame(maxWidth: .infinity).padding(16)
                                     .background(Palette.surface, in: RoundedRectangle(cornerRadius: 16))
                             }
@@ -109,6 +115,7 @@ struct EventDetail: View {
             .sheet(isPresented: $showEditor) { if let event { EventEditor(event: event) } }
             .sheet(isPresented: $showGuide) { WidgetGuide() }
             .sheet(isPresented: $showShareCard) { if let event { EventImageShareSheet(event: event) } }
+            .sheet(isPresented: $showDuplicate) { if let event { EventEditor(event: event, duplicate: true) } }
             .confirmationDialog("Удалить событие? Оно исчезнет и из виджета.",
                                 isPresented: $confirmDelete, titleVisibility: .visible) {
                 Button("Удалить", role: .destructive) {

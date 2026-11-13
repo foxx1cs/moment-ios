@@ -20,6 +20,10 @@ on:
         description: Run the iPhone simulator test suite
         type: boolean
         default: true
+      test_filter:
+        description: Optional Xcode test identifier to run
+        type: string
+        default: ''
   push:
     branches: [moment-ipa]
 
@@ -56,7 +60,7 @@ jobs:
   test:
     if: github.event_name == 'push' || inputs.run_simulator_tests == true
     env:
-      MOMENT_TEST_ONLY: ${{ inputs.widget_ui_only && 'MomentUITests/WidgetSetupUITests' || '' }}
+      MOMENT_TEST_ONLY: ${{ inputs.test_filter || (inputs.widget_ui_only && 'MomentUITests/WidgetSetupUITests' || '') }}
     runs-on: ${{ inputs.test_runner || 'macos-15' }}
     timeout-minutes: 30
     steps:
@@ -93,8 +97,8 @@ jobs:
 
 
   publish_release:
-    if: inputs.publish_release == true
-    needs: build
+    if: always() && inputs.publish_release == true && needs.build.result == 'success' && (needs.test.result == 'success' || needs.test.result == 'skipped')
+    needs: [build, test]
     runs-on: ubuntu-latest
     permissions:
       contents: write
